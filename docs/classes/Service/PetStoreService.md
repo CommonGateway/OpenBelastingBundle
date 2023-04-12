@@ -1,13 +1,13 @@
-# CommonGateway\PetStoreBundle\Service\PetStoreService
+# CommonGateway\ZgwToOpenBelastingBundle\Service\ZgwToOpenBelastingService
 
 ## Methods
 
 | Name | Description |
 |------|-------------|
-|[\_\_construct](#petstoreservice__construct)||
-|[petStoreHandler](#petstoreservicepetstorehandler)|An example handler that is triggered by an action.|
+|[\_\_construct](#zgwtoopenbelastingservice__construct)||
+|[zgwToOpenBelastingHandler](#zgwtoopenbelastingservicezgwtoopenbelastinghandler)|An example handler that is triggered by an action.|
 
-### PetStoreService::\_\_construct
+### ZgwToOpenBelastingService::\_\_construct
 
 **Description**
 
@@ -25,12 +25,12 @@
 
 <hr />
 
-### PetStoreService::petStoreHandler
+### ZgwToOpenBelastingService::zgwToOpenBelastingHandler
 
 **Description**
 
 ```php
-public petStoreHandler (array $data, array $configuration)
+public zgwToOpenBelastingHandler (array $data, array $configuration)
 ```
 
 An example handler that is triggered by an action.

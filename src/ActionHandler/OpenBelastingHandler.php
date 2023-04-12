@@ -9,7 +9,7 @@
 namespace CommonGateway\ZgwToOpenBelastingBundle\ActionHandler;
 
 use CommonGateway\CoreBundle\ActionHandler\ActionHandlerInterface;
-use CommonGateway\PetStoreBundle\Service\OpenBelastingService;
+use CommonGateway\ZgwToOpenBelastingBundle\Service\OpenBelastingService;
 
 
 class OpenBelastingHandler implements ActionHandlerInterface
@@ -20,17 +20,17 @@ class OpenBelastingHandler implements ActionHandlerInterface
      *
      * @var OpenBelastingService
      */
-    private OpenBelastingService $petStoreService;
+    private OpenBelastingService $openBelastingService;
 
 
     /**
      * The constructor
      *
-     * @param OpenBelastingService $petStoreService The pet store service
+     * @param OpenBelastingService $zgwToOpenBelastingService The pet store service
      */
-    public function __construct(OpenBelastingService $petStoreService)
+    public function __construct(OpenBelastingService $openBelastingService)
     {
-        $this->petStoreService = $petStoreService;
+        $this->openBelastingService = $openBelastingService;
 
     }//end __construct()
 
@@ -43,9 +43,9 @@ class OpenBelastingHandler implements ActionHandlerInterface
     public function getConfiguration(): array
     {
         return [
-            '$id'         => 'https://example.com/ActionHandler/PetStoreHandler.ActionHandler.json',
+            '$id'         => 'https://example.com/ActionHandler/ZgwToOpenBelastingHandler.ActionHandler.json',
             '$schema'     => 'https://docs.commongateway.nl/schemas/ActionHandler.schema.json',
-            'title'       => 'PetStore ActionHandler',
+            'title'       => 'ZgwToOpenBelasting ActionHandler',
             'description' => 'This handler returns a welcoming string',
             'required'    => [],
             'properties'  => [],
@@ -66,7 +66,7 @@ class OpenBelastingHandler implements ActionHandlerInterface
      */
     public function run(array $data, array $configuration): array
     {
-        return $this->petStoreService->petStoreHandler($data, $configuration);
+        return $this->openBelastingService->OpenBelastingService($data, $configuration);
 
     }//end run()
 

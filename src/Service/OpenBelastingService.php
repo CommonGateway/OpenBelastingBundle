@@ -61,16 +61,16 @@ class OpenBelastingService
      *
      * @return array A handler must ALWAYS return an array
      */
-    public function petStoreHandler(array $data, array $configuration): array
+    public function openBelastingHandler(array $data, array $configuration): array
     {
         $this->data          = $data;
         $this->configuration = $configuration;
 
-        $this->logger->debug("OpenBelastingService -> petStoreHandler()");
+        $this->logger->debug("OpenBelastingService -> openBelastingHandler()");
 
         return ['response' => 'Hello. Your ZgwToOpenBelastingBundle works'];
 
-    }//end petStoreHandler()
+    }//end zgwToOpenBelastingHandler()
 
 
 }//end class

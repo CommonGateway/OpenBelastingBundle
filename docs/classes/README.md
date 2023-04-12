@@ -1,4 +1,4 @@
-# CommonGateway\PetStoreBundle
+# CommonGateway\ZgwToOpenBelastingBundle
 
 *   [Service\InstallationService](Service/InstallationService.md)
-*   [Service\PetStoreService](Service/PetStoreService.md)
+*   [Service\ZgwToOpenBelastingService](Service/ZgwToOpenBelastingService.md)
