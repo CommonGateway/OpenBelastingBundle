@@ -1,0 +1,24 @@
+{
+  "title": "ZGWToOpenBelatingAction",
+  "$id": "https://openbelasting.nl/action/openbelasting.ZGWToOpenBelatingAction.action.json",
+  "$schema": "https://json-schema.org/draft/2020-12/action",
+  "version": "0.0.1",
+  "listens": [
+    "openbelasting.zaak.created"
+  ],
+  "throws": [],
+  "conditions": {
+    "==": [
+      {"var": "object.zaaktype.identificatie"},
+      "?"
+    ]
+  },
+  "class": "CommonGateway\\ZgwToOpenBelastingBundle\\ActionHandler\\ZgwToOpenBelastingHandler",
+  "configuration": {
+    "source": "https://openbelasting.nl/personen-zaken-ws/services",
+    "mapping": "https://openbelasting.nl/mapping/openbelasting.ZGWToOpenBelasting.mapping.json",
+    "synchronizationEntity": "https://vng.opencatalogi.nl/schemas/zrc.zaak.schema.json"
+  },
+  "isLockable": false,
+  "isEnabled": true
+}

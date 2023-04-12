@@ -1,0 +1,17 @@
+{
+  "title": "ZGWToOpenBelasting",
+  "$id": "https://openbelasting.nl/mapping/openbelasting.ZGWToOpenBelasting.mapping.json",
+  "$schema": "https://json-schema.org/draft/2020-12/mapping",
+  "version": "0.0.3",
+  "passTrough": false,
+  "mapping": {
+    "@xmlns:soapenv": "http://schemas.xmlsoap.org/soap/envelope/",
+    "@xmlns:dien": "urn:nl/procura/gba/v1.5/diensten",
+    "@xmlns:com": "urn:nl/procura/gba/v1.5/diensten/complextypes",
+    "@xmlns:emig": "urn:nl/procura/gba/v1.5/diensten/emigratie",
+    "soapenv:Body.dien:AanvraagRequest.dien:EmigratieaanvraagRequest.emig:Zaakgegevens.com:ZaakID": "identificatie",
+    "soapenv:Body.dien:AanvraagRequest.dien:EmigratieaanvraagRequest.emig:Zaakgegevens.com:Leverancier": "opdrachtgevendeOrganisatie",
+    "soapenv:Body.dien:AanvraagRequest.dien:EmigratieaanvraagRequest.emig:Zaakgegevens.com:DatumAanvraag": "{{ 'now'|date('Y-m-d') }}",
+    "soapenv:Body.dien:AanvraagRequest.dien:EmigratieaanvraagRequest.emig:Zaakgegevens.com:Toelichting": "toelichting"
+  }
+}

@@ -12,7 +12,7 @@ use CommonGateway\CoreBundle\ActionHandler\ActionHandlerInterface;
 use CommonGateway\ZgwToOpenBelastingBundle\Service\OpenBelastingService;
 
 
-class OpenBelastingHandler implements ActionHandlerInterface
+class ZGWToOpenBelastingHandler implements ActionHandlerInterface
 {
 
     /**
