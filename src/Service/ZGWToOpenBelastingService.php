@@ -254,30 +254,30 @@ class ZGWToOpenBelastingService
      *
      * @return array A handler must ALWAYS return an array
      */
-public function openBelastingHandler(array $data, array $configuration): array
-{
-    $this->data          = $data;
-    $this->configuration = $configuration;
+    public function openBelastingHandler(array $data, array $configuration): array
+    {
+        $this->data          = $data;
+        $this->configuration = $configuration;
 
-    if ($this->setMapping() === null) {
-        return [];
-    }
+        if ($this->setMapping() === null) {
+            return [];
+        }
 
-    $this->logger->debug("ZGWToOpenBelastingService -> ZGWToOpenBelastingHandler()");
+        $this->logger->debug("ZGWToOpenBelastingService -> ZGWToOpenBelastingHandler()");
 
-    $dataId = $data['object']['_self']['id'];
+        $dataId = $data['object']['_self']['id'];
 
-    $object      = $this->entityManager->find('App:ObjectEntity', $dataId);
-    $objectArray = $object->toArray();
-    $zaakTypeId  = $objectArray['zaaktype']['identificatie'];
+        $object      = $this->entityManager->find('App:ObjectEntity', $dataId);
+        $objectArray = $object->toArray();
+        $zaakTypeId  = $objectArray['zaaktype']['identificatie'];
 
-    // Do mapping with Zaak ObjectEntity as array.
-    $objectArray = $this->mappingService->mapping($this->mapping, $objectArray);
-    $objectArray = $this->getOpenBelastingProperties($object, $objectArray);
+        // Do mapping with Zaak ObjectEntity as array.
+        $objectArray = $this->mappingService->mapping($this->mapping, $objectArray);
+        $objectArray = $this->getOpenBelastingProperties($object, $objectArray);
 
-    return ['response' => $objectArray ];
+        return ['response' => $objectArray ];
 
-}//end openBelastingHandler()
+    }//end openBelastingHandler()
 
 
 }//end class
