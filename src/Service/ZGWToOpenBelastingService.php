@@ -143,30 +143,35 @@ class ZGWToOpenBelastingService
         $aanslagRegels = [];
         foreach ($zaakEigenschappen['?'] as $aanslagEigenschap) {
             $aanslagRegels[] = [
-                'belastingplichtnummer' => $aanslagEigenschap['?'],
-                'belastingJaar' => $aanslagEigenschap['?'],
-                'codeBelastingsoort' => $aanslagEigenschap['?'],
+                'belastingplichtnummer'      => $aanslagEigenschap['?'],
+                'belastingJaar'              => $aanslagEigenschap['?'],
+                'codeBelastingsoort'         => $aanslagEigenschap['?'],
                 'omschrijvingBelastingsoort' => $aanslagEigenschap['?'],
-                'ingangsdatum' => $aanslagEigenschap['?'],
-                'einddatum' => $aanslagEigenschap['?'],
-                'wozObjectnummer' => $aanslagEigenschap['?'],
-                'heffingsgrondslag' => $aanslagEigenschap['?'],
-                'bedrag' => $aanslagEigenschap['?'],
-                'bezwaarMogelijk' => $aanslagEigenschap['?'],
-                'adres' => [
-                    'postcode' => $aanslagEigenschap['?'],
-                    'woonplaatsnaam' => $aanslagEigenschap['?'],
-                    'straatnaam' => $aanslagEigenschap['?'],
-                    'huisnummer' => $aanslagEigenschap['?'],
-                    'huisletter' => $aanslagEigenschap['?'],
+                'ingangsdatum'               => $aanslagEigenschap['?'],
+                'einddatum'                  => $aanslagEigenschap['?'],
+                'wozObjectnummer'            => $aanslagEigenschap['?'],
+                'heffingsgrondslag'          => $aanslagEigenschap['?'],
+                'bedrag'                     => $aanslagEigenschap['?'],
+                'bezwaarMogelijk'            => $aanslagEigenschap['?'],
+                'adres'                      => [
+                    'postcode'             => $aanslagEigenschap['?'],
+                    'woonplaatsnaam'       => $aanslagEigenschap['?'],
+                    'straatnaam'           => $aanslagEigenschap['?'],
+                    'huisnummer'           => $aanslagEigenschap['?'],
+                    'huisletter'           => $aanslagEigenschap['?'],
                     'huisnummertoevoeging' => $aanslagEigenschap['?'],
-                    'locatieomschrijving' => $aanslagEigenschap['?'],
-            ]];
+                    'locatieomschrijving'  => $aanslagEigenschap['?'],
+                ],
+            ];
         }//end foreach
 
         return $aanslagRegels;
 
-    } //end getBsnFromRollen()
+    }//end mapAanslagRegels()
+
+
+    // end getBsnFromRollen()
+
 
     /**
      * This function gets the beschikkingsregels of the zgw zaakeigenschappen.
@@ -181,23 +186,28 @@ class ZGWToOpenBelastingService
         foreach ($zaakEigenschappen['?'] as $beschikkingsregelEigenschap) {
             $beschikkingsregels[] = [
                 'sleutelBeschikkingsregel' => $beschikkingsregelEigenschap['?'],
-                'wozObjectnummer' => $beschikkingsregelEigenschap['?'],
-                'vastgesteldeWaarde' => $beschikkingsregelEigenschap['?'],
-                'bezwaarMogelijk' => $beschikkingsregelEigenschap['?'],
-                'adres' => [
-                    'postcode' => $beschikkingsregelEigenschap['?'],
-                    'woonplaatsnaam' => $beschikkingsregelEigenschap['?'],
-                    'straatnaam' => $beschikkingsregelEigenschap['?'],
-                    'huisnummer' => $beschikkingsregelEigenschap['?'],
-                    'huisletter' => $beschikkingsregelEigenschap['?'],
+                'wozObjectnummer'          => $beschikkingsregelEigenschap['?'],
+                'vastgesteldeWaarde'       => $beschikkingsregelEigenschap['?'],
+                'bezwaarMogelijk'          => $beschikkingsregelEigenschap['?'],
+                'adres'                    => [
+                    'postcode'             => $beschikkingsregelEigenschap['?'],
+                    'woonplaatsnaam'       => $beschikkingsregelEigenschap['?'],
+                    'straatnaam'           => $beschikkingsregelEigenschap['?'],
+                    'huisnummer'           => $beschikkingsregelEigenschap['?'],
+                    'huisletter'           => $beschikkingsregelEigenschap['?'],
                     'huisnummertoevoeging' => $beschikkingsregelEigenschap['?'],
-                    'locatieomschrijving' => $beschikkingsregelEigenschap['?'],
-            ]];
+                    'locatieomschrijving'  => $beschikkingsregelEigenschap['?'],
+                ],
+            ];
         }//end foreach
 
         return $beschikkingsregels;
 
-    } //end getBsnFromRollen()
+    }//end mapBeschikkingsregels()
+
+
+    // end getBsnFromRollen()
+
 
     /**
      * Maps zgw eigenschappen to openbelasting properties.
@@ -209,32 +219,33 @@ class ZGWToOpenBelastingService
      */
     private function getOpenBelastingProperties(ObjectEntity $object, array $output): array
     {
-        $properties = ['all'];
+        $properties        = ['all'];
         $zaakEigenschappen = $this->getZaakEigenschappen($object, $properties);
 
         $bsn = $this->getBsnFromRollen($object);
 
-        $aanslagRegels = $this->mapAanslagRegels($zaakEigenschappen);
+        $aanslagRegels     = $this->mapAanslagRegels($zaakEigenschappen);
         $beschikkingregels = $this->mapBeschikkingsregels($zaakEigenschappen);
 
         return [
-            'aanslagbiljetnummer' => $zaakEigenschappen['?'],
-            'aanslagbiljetvolgnummer' => $zaakEigenschappen['?'],
-            'dagtekening' => $zaakEigenschappen['?'],
-            'belastingJaar' => $zaakEigenschappen['?'],
+            'aanslagbiljetnummer'      => $zaakEigenschappen['?'],
+            'aanslagbiljetvolgnummer'  => $zaakEigenschappen['?'],
+            'dagtekening'              => $zaakEigenschappen['?'],
+            'belastingJaar'            => $zaakEigenschappen['?'],
             'belastingsoortcombinatie' => $zaakEigenschappen['?'],
-            'totaalbedragAanslag' => $zaakEigenschappen['?'],
-            'bezwaarMogelijk' => $zaakEigenschappen['?'],
-            'belastingplichtige' => [
-                'burgerservicenummer' => $zaakEigenschappen['?']
+            'totaalbedragAanslag'      => $zaakEigenschappen['?'],
+            'bezwaarMogelijk'          => $zaakEigenschappen['?'],
+            'belastingplichtige'       => [
+                'burgerservicenummer' => $zaakEigenschappen['?'],
             ],
-            'aanslagregels' => $aanslagRegels,
-            'beschikkingsregels' => $beschikkingregels,
+            'aanslagregels'            => $aanslagRegels,
+            'beschikkingsregels'       => $beschikkingregels,
         ];
 
-    } //end getOpenBelastingProperties()
-
     }//end getOpenBelastingProperties()
+
+
+}//end class
 
 
     /**
@@ -245,30 +256,30 @@ class ZGWToOpenBelastingService
      *
      * @return array A handler must ALWAYS return an array
      */
-    public function openBelastingHandler(array $data, array $configuration): array
-    {
-        $this->data          = $data;
-        $this->configuration = $configuration;
+public function openBelastingHandler(array $data, array $configuration): array
+{
+    $this->data          = $data;
+    $this->configuration = $configuration;
 
-        if ($this->setMapping() === null) {
-            return [];
-        }
+    if ($this->setMapping() === null) {
+        return [];
+    }
 
-        $this->logger->debug("ZGWToOpenBelastingService -> ZGWToOpenBelastingHandler()");
+    $this->logger->debug("ZGWToOpenBelastingService -> ZGWToOpenBelastingHandler()");
 
-        $dataId = $data['object']['_self']['id'];
+    $dataId = $data['object']['_self']['id'];
 
-        $object      = $this->entityManager->find('App:ObjectEntity', $dataId);
-        $objectArray = $object->toArray();
-        $zaakTypeId  = $objectArray['zaaktype']['identificatie'];
+    $object      = $this->entityManager->find('App:ObjectEntity', $dataId);
+    $objectArray = $object->toArray();
+    $zaakTypeId  = $objectArray['zaaktype']['identificatie'];
 
-        // Do mapping with Zaak ObjectEntity as array.
-        $objectArray = $this->mappingService->mapping($this->mapping, $objectArray);
-        $objectArray = $this->getOpenBelastingProperties($object, $objectArray);
+    // Do mapping with Zaak ObjectEntity as array.
+    $objectArray = $this->mappingService->mapping($this->mapping, $objectArray);
+    $objectArray = $this->getOpenBelastingProperties($object, $objectArray);
 
-        return ['response' => $objectArray ];
+    return ['response' => $objectArray ];
 
-    }//end openBelastingHandler()
+}//end openBelastingHandler()
 
 
 }//end class
