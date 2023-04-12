@@ -50,8 +50,8 @@ class ZGWToOpenBelastingService
 
 
     /**
-     * @param EntityManagerInterface $entityManager The Entity Manager.
-     * @param LoggerInterface        $pluginLogger  The plugin version of the logger interface.
+     * @param EntityManagerInterface $entityManager  The Entity Manager.
+     * @param LoggerInterface        $pluginLogger   The plugin version of the logger interface.
      * @param MappingService         $mappingService MappingService.
      */
     public function __construct(
@@ -59,11 +59,11 @@ class ZGWToOpenBelastingService
         LoggerInterface $pluginLogger,
         MappingService $mappingService
     ) {
-        $this->entityManager = $entityManager;
-        $this->logger        = $pluginLogger;
+        $this->entityManager  = $entityManager;
+        $this->logger         = $pluginLogger;
         $this->mappingService = $mappingService;
-        $this->configuration = [];
-        $this->data          = [];
+        $this->configuration  = [];
+        $this->data           = [];
 
     }//end __construct()
 
@@ -83,7 +83,9 @@ class ZGWToOpenBelastingService
         }
 
         return $this->mapping;
-    } //end setMapping()
+
+    }//end setMapping()
+
 
     /**
      * This function gets the zaakEigenschappen from the zgwZaak with the given properties (simXml elementen and Stuf extraElementen).
@@ -103,7 +105,9 @@ class ZGWToOpenBelastingService
         }
 
         return $zaakEigenschappen;
+
     }//end getZaakEigenschappen()
+
 
     /**
      * This function gets the bsn of the rol with the betrokkeneType set as natuurlijk_persoon.
@@ -123,7 +127,9 @@ class ZGWToOpenBelastingService
         }
 
         return null;
-    } //end getBsnFromRollen()
+
+    }//end getBsnFromRollen()
+
 
     /**
      * This function gets the aanslagregels of the zgw zaakeigenschappen.
@@ -197,7 +203,7 @@ class ZGWToOpenBelastingService
      * Maps zgw eigenschappen to openbelasting properties.
      *
      * @param ObjectEntity $object The zgw case ObjectEntity.
-     * @param array $output The output data
+     * @param array        $output The output data
      *
      * @return array
      */
@@ -228,6 +234,9 @@ class ZGWToOpenBelastingService
 
     } //end getOpenBelastingProperties()
 
+    }//end getOpenBelastingProperties()
+
+
     /**
      * An example handler that is triggered by an action.
      *
@@ -249,10 +258,9 @@ class ZGWToOpenBelastingService
 
         $dataId = $data['object']['_self']['id'];
 
-
-        $object = $this->entityManager->find('App:ObjectEntity', $dataId);
+        $object      = $this->entityManager->find('App:ObjectEntity', $dataId);
         $objectArray = $object->toArray();
-        $zaakTypeId = $objectArray['zaaktype']['identificatie'];
+        $zaakTypeId  = $objectArray['zaaktype']['identificatie'];
 
         // Do mapping with Zaak ObjectEntity as array.
         $objectArray = $this->mappingService->mapping($this->mapping, $objectArray);
