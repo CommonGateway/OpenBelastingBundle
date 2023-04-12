@@ -11,6 +11,7 @@ namespace CommonGateway\ZgwToOpenBelastingBundle\Service;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use App\Entity\Mapping;
+use App\Entity\ObjectEntity;
 use CommonGateway\CoreBundle\Service\MappingService;
 
 class ZGWToOpenBelastingService
@@ -233,8 +234,6 @@ class ZGWToOpenBelastingService
         ];
 
     } //end getOpenBelastingProperties()
-
-    }//end getOpenBelastingProperties()
 
 
     /**
