@@ -1,5 +1,5 @@
 {
-    "name": "common-gateway/ZgwToOpenBelastingBundle",
+    "name": "common-gateway/zgw-to-open-belasting-bundle",
     "description": "An example package for creating symfony flex bundles as plugins",
     "type": "symfony-bundle",
     "keywords": [
