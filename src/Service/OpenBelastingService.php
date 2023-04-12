@@ -70,7 +70,7 @@ class OpenBelastingService
 
         return ['response' => 'Hello. Your ZgwToOpenBelastingBundle works'];
 
-    }//end zgwToOpenBelastingHandler()
+    }//end openBelastingHandler()
 
 
 }//end class
