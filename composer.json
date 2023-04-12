@@ -1,5 +1,5 @@
 {
-    "name": "common-gateway/pet-store-bundle",
+    "name": "common-gateway/ZgwToOpenBelastingBundle",
     "description": "An example package for creating symfony flex bundles as plugins",
     "type": "symfony-bundle",
     "keywords": [
@@ -9,7 +9,8 @@
         "conduction",
         "symfony",
         "common-gateway-plugin",
-        "pet store"
+        "Open Belastingen",
+        "ZGW"
     ],
     "homepage": "https://commongateway.nl",
     "license": "EUPL-1.2",

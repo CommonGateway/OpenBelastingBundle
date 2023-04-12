@@ -6,29 +6,29 @@
  * @license EUPL-1.2 https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
  */
 
-namespace CommonGateway\PetStoreBundle\ActionHandler;
+namespace CommonGateway\ZgwToOpenBelastingBundle\ActionHandler;
 
 use CommonGateway\CoreBundle\ActionHandler\ActionHandlerInterface;
-use CommonGateway\PetStoreBundle\Service\PetStoreService;
+use CommonGateway\PetStoreBundle\Service\OpenBelastingService;
 
 
-class PetStoreHandler implements ActionHandlerInterface
+class OpenBelastingHandler implements ActionHandlerInterface
 {
 
     /**
      * The pet store service used by the handler
      *
-     * @var PetStoreService
+     * @var OpenBelastingService
      */
-    private PetStoreService $petStoreService;
+    private OpenBelastingService $petStoreService;
 
 
     /**
      * The constructor
      *
-     * @param PetStoreService $petStoreService The pet store service
+     * @param OpenBelastingService $petStoreService The pet store service
      */
-    public function __construct(PetStoreService $petStoreService)
+    public function __construct(OpenBelastingService $petStoreService)
     {
         $this->petStoreService = $petStoreService;
 

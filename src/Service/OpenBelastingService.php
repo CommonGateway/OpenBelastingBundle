@@ -6,12 +6,12 @@
  * @license EUPL-1.2 https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
  */
 
-namespace CommonGateway\PetStoreBundle\Service;
+namespace CommonGateway\ZgwToOpenBelastingBundle\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 
-class PetStoreService
+class OpenBelastingService
 {
 
     /**
@@ -66,9 +66,9 @@ class PetStoreService
         $this->data          = $data;
         $this->configuration = $configuration;
 
-        $this->logger->debug("PetStoreService -> petStoreHandler()");
+        $this->logger->debug("OpenBelastingService -> petStoreHandler()");
 
-        return ['response' => 'Hello. Your PetStoreBundle works'];
+        return ['response' => 'Hello. Your ZgwToOpenBelastingBundle works'];
 
     }//end petStoreHandler()
 

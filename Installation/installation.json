@@ -1,5 +1,5 @@
 {
-    "installationService": "CommonGateway\\PetStoreBundle\\Service\\InstallationService",
+    "installationService": "CommonGateway\\ZgwToOpenBelastingBundle\\Service\\InstallationService",
     "applications": [
         {
             "title": "Example Front-end Application",
