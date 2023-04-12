@@ -274,7 +274,6 @@ class ZGWToOpenBelastingService
         // Do mapping with Zaak ObjectEntity as array.
         // @todo mapping with mappingservice probably not viable for this scenario because mostly all values are in zaakeigenschappen.
         // $objectArray = $this->mappingService->mapping($this->mapping, $objectArray);
-
         $objectArray = $this->getOpenBelastingProperties($object, $objectArray);
 
         return ['response' => $objectArray ];
