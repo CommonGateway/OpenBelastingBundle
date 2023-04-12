@@ -243,7 +243,7 @@ class ZGWToOpenBelastingService
             'beschikkingsregels'       => $beschikkingregels,
         ];
 
-    } //end getOpenBelastingProperties()
+    }//end getOpenBelastingProperties()
 
 
     /**
