@@ -8,6 +8,7 @@
 
 namespace CommonGateway\OpenBelastingBundle\Service;
 
+use CommonGateway\CoreBundle\Service\GatewayResourceService;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use App\Entity\Mapping;
@@ -27,7 +28,12 @@ class OpenBelastingService
      * @var array
      */
     private array $data;
-
+    
+    /**
+     * @var GatewayResourceService
+     */
+    private GatewayResourceService $resourceService;
+    
     /**
      * @var EntityManagerInterface
      */
@@ -37,11 +43,6 @@ class OpenBelastingService
      * @var MappingService
      */
     private MappingService $mappingService;
-
-    /**
-     * @var ResourceService
-     */
-    private ResourceService $resourceService;
 
     /**
      * The plugin logger.
@@ -57,6 +58,7 @@ class OpenBelastingService
 
 
     /**
+     * @param GatewayResourceService $resourceService The Gateway Resource Service.
      * @param EntityManagerInterface $entityManager  The Entity Manager.
      * @param LoggerInterface        $pluginLogger   The plugin version of the logger interface.
      * @param MappingService         $mappingService MappingService.
@@ -65,12 +67,12 @@ class OpenBelastingService
         EntityManagerInterface $entityManager,
         LoggerInterface $pluginLogger,
         MappingService $mappingService,
-        ResourceService $resourceService
+        GatewayResourceService $resourceService
     ) {
+        $this->resourceService = $resourceService;
         $this->entityManager   = $entityManager;
         $this->logger          = $pluginLogger;
         $this->mappingService  = $mappingService;
-        $this->resourceService = $resourceService;
         $this->configuration   = [];
         $this->data            = [];
 
