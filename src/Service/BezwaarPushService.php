@@ -10,8 +10,6 @@ namespace CommonGateway\OpenBelastingBundle\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
-use App\Entity\Mapping;
-use CommonGateway\CoreBundle\Service\MappingService;
 use CommonGateway\CoreBundle\Service\CallService;
 use App\Service\SynchronizationService;
 use Exception;
@@ -35,11 +33,6 @@ class OpenBelastingService
     private EntityManagerInterface $entityManager;
 
     /**
-     * @var MappingService
-     */
-    private MappingService $mappingService;
-
-    /**
      * @var SynchronizationService
      */
     private SynchronizationService $synchronizationService;
@@ -56,11 +49,6 @@ class OpenBelastingService
      */
     private LoggerInterface $logger;
 
-    /**
-     * @var Mapping|null The mapping we are using for the outgoing call.
-     */
-    private ?Mapping $mapping;
-
 
     /**
      * @param EntityManagerInterface $entityManager  The Entity Manager.
@@ -70,13 +58,11 @@ class OpenBelastingService
     public function __construct(
         EntityManagerInterface $entityManager,
         LoggerInterface $pluginLogger,
-        MappingService $mappingService,
         SynchronizationService $synchronizationService,
         CallService $callService
     ) {
         $this->entityManager  = $entityManager;
         $this->logger         = $pluginLogger;
-        $this->mappingService = $mappingService;
         $this->synchronizationService = $synchronizationService;
         $this->callService = $callService;
         $this->configuration  = [];
