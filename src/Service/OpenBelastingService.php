@@ -28,12 +28,12 @@ class OpenBelastingService
      * @var array
      */
     private array $data;
-    
+
     /**
      * @var GatewayResourceService
      */
     private GatewayResourceService $resourceService;
-    
+
     /**
      * @var EntityManagerInterface
      */
@@ -59,9 +59,9 @@ class OpenBelastingService
 
     /**
      * @param GatewayResourceService $resourceService The Gateway Resource Service.
-     * @param EntityManagerInterface $entityManager  The Entity Manager.
-     * @param LoggerInterface        $pluginLogger   The plugin version of the logger interface.
-     * @param MappingService         $mappingService MappingService.
+     * @param EntityManagerInterface $entityManager   The Entity Manager.
+     * @param LoggerInterface        $pluginLogger    The plugin version of the logger interface.
+     * @param MappingService         $mappingService  MappingService.
      */
     public function __construct(
         EntityManagerInterface $entityManager,
