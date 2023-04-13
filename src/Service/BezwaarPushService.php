@@ -61,12 +61,12 @@ class OpenBelastingService
         SynchronizationService $synchronizationService,
         CallService $callService
     ) {
-        $this->entityManager  = $entityManager;
-        $this->logger         = $pluginLogger;
+        $this->entityManager          = $entityManager;
+        $this->logger                 = $pluginLogger;
         $this->synchronizationService = $synchronizationService;
-        $this->callService = $callService;
-        $this->configuration  = [];
-        $this->data           = [];
+        $this->callService            = $callService;
+        $this->configuration          = [];
+        $this->data                   = [];
 
     }//end __construct()
 
@@ -87,7 +87,7 @@ class OpenBelastingService
         $source = $this->entityManager->getRepository('App:Gateway')->findOneBy(['reference' => 'https://openbelasting.nl/source/openbelasting.pinkapi.source.json']);
         $entity = $this->entityManager->getRepository('App:Entity')->findOneBy(['reference' => 'https://openbelasting.nl/schemas/openblasting.bezwaaraanvraag.schema.json']);
 
-        if ($source === null || $entity === null) { 
+        if ($source === null || $entity === null) {
             return [];
         }
 
@@ -101,7 +101,7 @@ class OpenBelastingService
         $synchronization = $this->synchronizationService->findSyncBySource($source, $entity, $object->getId()->toString());
         $this->synchronizationService->synchronize($synchronization, $objectArray);
 
-        // @todo maybe unset 
+        // @todo maybe unset
         unset($objectArray['id']);
         unset($objectArray['_self']);
 
