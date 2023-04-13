@@ -128,7 +128,7 @@ class SyncAanslagenHandler
         }
 
         $fetchedAanslagenCount = count($fetchedAanslagen);
-        $this->logger->debug("Fetched $fetchedAanslagenCount casetypes");
+        $this->logger->debug("Fetched $fetchedAanslagenCount aanslagen");
 
         $syncedAanslagen = 0;
         $flushCount      = 0;
@@ -145,7 +145,7 @@ class SyncAanslagenHandler
             }//end if
         }//end foreach
 
-        $this->logger->debug("Synced $flushCount aanslagen from the $syncedAanslagen fetched casetypes");
+        $this->logger->debug("Synced $flushCount aanslagen from the $syncedAanslagen fetched aanslagen");
 
         return ['response' => []];
 
