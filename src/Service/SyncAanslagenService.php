@@ -71,7 +71,6 @@ class SyncAanslagenHandler
     }//end __construct()
 
 
-    
     /**
      * Synces a aanslag.
      *
@@ -94,7 +93,7 @@ class SyncAanslagenHandler
 
         return $synchronization->getObject();
 
-    }//end caseTypeToZaakType()
+    }//end syncAanslag()
 
 
     /**
@@ -131,12 +130,12 @@ class SyncAanslagenHandler
         $fetchedAanslagenCount = count($fetchedAanslagen);
         $this->logger->debug("Fetched $fetchedAanslagenCount casetypes");
 
-        $syncedAanslagen      = 0;
-        $flushCount           = 0;
+        $syncedAanslagen = 0;
+        $flushCount      = 0;
         foreach ($fetchedAanslagen as $fetchedAanslag) {
             if ($this->syncAanslag($fetchedAanslag, $source, $entity)) {
                 $fetchedAanslagenCount = ($fetchedAanslagenCount + 1);
-                $flushCount           = ($flushCount + 1);
+                $flushCount            = ($flushCount + 1);
             }//end if
 
             // Flush every 20.
@@ -150,7 +149,7 @@ class SyncAanslagenHandler
 
         return ['response' => []];
 
-    }//end openBelastingHandler()
+    }//end syncAanslagenHandler()
 
 
 }//end class
