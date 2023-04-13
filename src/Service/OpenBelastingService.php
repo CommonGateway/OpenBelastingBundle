@@ -67,12 +67,12 @@ class OpenBelastingService
         MappingService $mappingService,
         ResourceService $resourceService
     ) {
-        $this->entityManager  = $entityManager;
-        $this->logger         = $pluginLogger;
-        $this->mappingService = $mappingService;
+        $this->entityManager   = $entityManager;
+        $this->logger          = $pluginLogger;
+        $this->mappingService  = $mappingService;
         $this->resourceService = $resourceService;
-        $this->configuration  = [];
-        $this->data           = [];
+        $this->configuration   = [];
+        $this->data            = [];
 
     }//end __construct()
 
@@ -250,7 +250,7 @@ class OpenBelastingService
 
         $mapping = $this->resourceService->getMapping('https://api.github.com/oc.githubRepository.mapping.json', 'open-catalogi/open-catalogi-bundle');
 
-        if ($mapping === null) { 
+        if ($mapping === null) {
             return [];
         }
 
