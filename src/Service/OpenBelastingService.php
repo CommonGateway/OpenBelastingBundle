@@ -13,6 +13,7 @@ use Psr\Log\LoggerInterface;
 use App\Entity\Mapping;
 use App\Entity\ObjectEntity;
 use CommonGateway\CoreBundle\Service\MappingService;
+use CommonGateway\CoreBundle\Service\ResourceService;
 
 class OpenBelastingService
 {
@@ -38,6 +39,11 @@ class OpenBelastingService
     private MappingService $mappingService;
 
     /**
+     * @var ResourceService
+     */
+    private ResourceService $resourceService;
+
+    /**
      * The plugin logger.
      *
      * @var LoggerInterface
@@ -58,34 +64,17 @@ class OpenBelastingService
     public function __construct(
         EntityManagerInterface $entityManager,
         LoggerInterface $pluginLogger,
-        MappingService $mappingService
+        MappingService $mappingService,
+        ResourceService $resourceService
     ) {
         $this->entityManager  = $entityManager;
         $this->logger         = $pluginLogger;
         $this->mappingService = $mappingService;
+        $this->resourceService = $resourceService;
         $this->configuration  = [];
         $this->data           = [];
 
     }//end __construct()
-
-
-    /**
-     * Gets and sets a Mapping object using the required configuration['mapping'] to find the correct Mapping.
-     *
-     * @return Mapping|null The Mapping object we found or null if we don't find one.
-     */
-    private function setMapping(): ?Mapping
-    {
-        $this->mapping = $this->entityManager->getRepository('App:Mapping')->findOneBy(['reference' => $this->configuration['mapping']]);
-        if ($this->mapping instanceof Mapping === false) {
-            $this->logger->error("No mapping found with reference: {$this->configuration['mapping']}");
-
-            return null;
-        }
-
-        return $this->mapping;
-
-    }//end setMapping()
 
 
     /**
@@ -259,7 +248,9 @@ class OpenBelastingService
         $this->data          = $data;
         $this->configuration = $configuration;
 
-        if ($this->setMapping() === null) {
+        $mapping = $this->resourceService->getMapping('https://api.github.com/oc.githubRepository.mapping.json', 'open-catalogi/open-catalogi-bundle');
+
+        if ($mapping === null) { 
             return [];
         }
 
