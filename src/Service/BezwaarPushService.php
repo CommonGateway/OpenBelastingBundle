@@ -248,7 +248,7 @@ class OpenBelastingService
         $this->data          = $data;
         $this->configuration = $configuration;
 
-        $mapping = $this->resourceService->getMapping('https://api.github.com/oc.githubRepository.mapping.json', 'open-catalogi/open-catalogi-bundle');
+        $mapping = $this->resourceService->get('https://api.github.com/oc.githubRepository.mapping.json', 'open-catalogi/open-catalogi-bundle');
 
         if ($mapping === null) { 
             return [];
@@ -260,10 +260,9 @@ class OpenBelastingService
 
         $object      = $this->entityManager->find('App:ObjectEntity', $dataId);
         $objectArray = $object->toArray();
-        $zaakTypeId  = $objectArray['zaaktype']['identificatie'];
 
-        // Do mapping with Zaak ObjectEntity as array.
-        // @todo mapping with mappingservice probably not viable for this scenario because mostly all values are in zaakeigenschappen.
+        // mapping with mappingservice probably not needed for this scenario because mostly all values are identical.
+
         // $objectArray = $this->mappingService->mapping($this->mapping, $objectArray);
         $objectArray = $this->getOpenBelastingProperties($object, $objectArray);
 

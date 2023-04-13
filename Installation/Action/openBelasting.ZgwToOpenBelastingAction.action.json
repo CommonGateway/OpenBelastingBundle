@@ -1,23 +1,22 @@
 {
-  "title": "OpenBelatingAction",
-  "$id": "https://openbelasting.nl/action/openbelasting.OpenBelatingAction.action.json",
+  "title": "BezwaarPushAction",
+  "$id": "https://openbelasting.nl/action/openbelasting.BezwaarPushAction.action.json",
   "$schema": "https://docs.commongateway.nl/schemas/Action.schema.json",
   "version": "0.0.1",
   "listens": [
-    "openbelasting.zaak.created"
+    "commongatway.object.created"
   ],
   "throws": [],
   "conditions": {
     "==": [
-      {"var": "object.zaaktype.identificatie"},
-      "?"
+      {"var": "reference"},
+      "https://openbelasting.nl/schemas/openblasting.bezwaaraanvraag.schema.json"
     ]
   },
-  "class": "CommonGateway\\OpenBelastingBundle\\ActionHandler\\OpenBelastingHandler",
+  "class": "CommonGateway\\OpenBelastingBundle\\ActionHandler\\BezwaarPushHandler",
   "configuration": {
-    "source": "https://openbelasting.nl/personen-zaken-ws/services",
-    "mapping": "https://openbelasting.nl/mapping/openbelasting.OpenBelasting.mapping.json",
-    "synchronizationEntity": "https://vng.opencatalogi.nl/schemas/zrc.zaak.schema.json"
+    "source": "https://openbelasting.nl/source/openbelasting.pinkapi.source.json",
+    "synchronizationEntity": "https://openbelasting.nl/schemas/openblasting.bezwaaraanvraag.schema.json"
   },
   "isLockable": false,
   "isEnabled": true
