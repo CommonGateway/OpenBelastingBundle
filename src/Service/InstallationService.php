@@ -6,7 +6,7 @@
  * @license EUPL-1.2 https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
  */
 
-namespace CommonGateway\ZgwToOpenBelastingBundle\Service;
+namespace CommonGateway\OpenBelastingBundle\Service;
 
 use CommonGateway\CoreBundle\Installer\InstallerInterface;
 use Doctrine\ORM\EntityManagerInterface;
@@ -54,7 +54,7 @@ class InstallationService implements InstallerInterface
      */
     public function install()
     {
-        $this->logger->debug("ZgwToOpenBelastingBundle -> Install()");
+        $this->logger->debug("OpenBelastingBundle -> Install()");
         
         $this->checkDataConsistency();
 
@@ -68,7 +68,7 @@ class InstallationService implements InstallerInterface
      */
     public function update()
     {
-        $this->logger->debug("ZgwToOpenBelastingBundle -> Update()");
+        $this->logger->debug("OpenBelastingBundle -> Update()");
         
         $this->checkDataConsistency();
 
@@ -82,7 +82,7 @@ class InstallationService implements InstallerInterface
      */
     public function uninstall()
     {
-        $this->logger->debug("ZgwToOpenBelastingBundle -> Uninstall()");
+        $this->logger->debug("OpenBelastingBundle -> Uninstall()");
         
         // Do some cleanup to uninstall correctly...
     }//end uninstall()

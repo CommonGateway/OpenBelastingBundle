@@ -1,0 +1,26 @@
+{
+  "$id": "https://openbelasting.nl/schemas/openblasting.beschikkingsregelgrieven.schema.json",
+  "$schema": "https://docs.commongateway.nl/schemas/Entity.schema.json",
+  "version": "0.1",
+  "title": "BeschikkingsRegelGrieven",
+  "required": [
+    "grieven",
+    "sleutelBeschikkingsregel"
+    ],
+    "type": "object",
+    "properties": {
+        "sleutelBeschikkingsregel": {
+            "maxLength": 40,
+            "minLength": 1,
+            "type": "string",
+            "description": "De sleutel van de beschikkingsregel waartegen bezwaar gemaakt wordt.",
+            "example": "2008-aap-000001755"
+        },
+        "grieven": {
+            "type": "array",
+            "description": "Lijst van grieven over deze beschikkingsregel",
+            "items": {"$ref": "#/components/schemas/Grief"}
+        }
+    },
+    "description": "beschikkingsregel met een of meer grieven"
+}

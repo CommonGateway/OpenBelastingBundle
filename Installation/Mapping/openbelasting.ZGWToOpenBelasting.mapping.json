@@ -1,6 +1,6 @@
 {
-  "title": "ZGWToOpenBelasting",
-  "$id": "https://openbelasting.nl/mapping/openbelasting.ZGWToOpenBelasting.mapping.json",
+  "title": "OpenBelasting",
+  "$id": "https://openbelasting.nl/mapping/openbelasting.OpenBelasting.mapping.json",
   "$schema": "https://json-schema.org/draft/2020-12/mapping",
   "version": "0.0.3",
   "passTrough": false,

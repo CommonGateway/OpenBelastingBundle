@@ -1,10 +1,10 @@
 <?php
 return (object)[
-    'rootNamespace' => 'CommonGateway\ZgwToOpenBelastingBundle',
+    'rootNamespace' => 'CommonGateway\OpenBelastingBundle',
     'destDirectory' => 'docs/classes',
     'format' => 'github',
     'classes' => [
-        '\CommonGateway\ZgwToOpenBelastingBundle\Service\InstallationService',
-        '\CommonGateway\ZgwToOpenBelastingBundle\Service\ZgwToOpenBelastingBundleService'
+        '\CommonGateway\OpenBelastingBundle\Service\InstallationService',
+        '\CommonGateway\OpenBelastingBundle\Service\OpenBelastingBundleService'
     ],
 ];

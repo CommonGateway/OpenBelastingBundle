@@ -6,7 +6,7 @@
  * @license EUPL-1.2 https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
  */
 
-namespace CommonGateway\ZgwToOpenBelastingBundle\Service;
+namespace CommonGateway\OpenBelastingBundle\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
@@ -14,7 +14,7 @@ use App\Entity\Mapping;
 use App\Entity\ObjectEntity;
 use CommonGateway\CoreBundle\Service\MappingService;
 
-class ZGWToOpenBelastingService
+class OpenBelastingService
 {
 
     /**
@@ -263,7 +263,7 @@ class ZGWToOpenBelastingService
             return [];
         }
 
-        $this->logger->debug("ZGWToOpenBelastingService -> ZGWToOpenBelastingHandler()");
+        $this->logger->debug("OpenBelastingService -> OpenBelastingHandler()");
 
         $dataId = $data['object']['_self']['id'];
 

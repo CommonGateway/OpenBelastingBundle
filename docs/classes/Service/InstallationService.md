@@ -1,4 +1,4 @@
-# CommonGateway\ZgwToOpenBelastingBundle\Service\InstallationService
+# CommonGateway\OpenBelastingBundle\Service\InstallationService
 
 ## Implements:
 

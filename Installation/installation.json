@@ -1,11 +1,22 @@
 {
-    "installationService": "CommonGateway\\ZgwToOpenBelastingBundle\\Service\\InstallationService",
+    "installationService": "CommonGateway\\OpenBelastingBundle\\Service\\InstallationService",
     "applications": [],
     "users": [],
     "cards": [],
     "actions": [],
     "collections": [],
     "endpoints": {
-        "schemas": []
+        "schemas": [
+            {
+                "reference": "https://openbelasting.nl/schemas/openblasting.aanslagbiljet.schema.json",
+                "path": "v1/aanslagen",
+                "methods": ["GET"]
+            },
+            {
+                "reference": "https://openbelasting.nl/schemas/openblasting.bezwaaraanvraag.schema.json",
+                "path": "v1/bezwaren",
+                "methods": ["POST"]
+            }
+        ]
     }
 }
