@@ -6,10 +6,10 @@
  * @license EUPL-1.2 https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
  */
 
-namespace CommonGateway\ZgwToOpenBelastingBundle\ActionHandler;
+namespace CommonGateway\OpenBelastingBundle\ActionHandler;
 
 use CommonGateway\CoreBundle\ActionHandler\ActionHandlerInterface;
-use CommonGateway\ZgwToOpenBelastingBundle\Service\OpenBelastingService;
+use CommonGateway\OpenBelastingBundle\Service\OpenBelastingService;
 
 
 class OpenBelastingHandler implements ActionHandlerInterface
@@ -26,7 +26,7 @@ class OpenBelastingHandler implements ActionHandlerInterface
     /**
      * The constructor
      *
-     * @param OpenBelastingService $zgwToOpenBelastingService The pet store service
+     * @param OpenBelastingService $OpenBelastingService The pet store service
      */
     public function __construct(OpenBelastingService $openBelastingService)
     {
@@ -43,9 +43,9 @@ class OpenBelastingHandler implements ActionHandlerInterface
     public function getConfiguration(): array
     {
         return [
-            '$id'         => 'https://example.com/ActionHandler/ZgwToOpenBelastingHandler.ActionHandler.json',
+            '$id'         => 'https://example.com/ActionHandler/OpenBelastingHandler.ActionHandler.json',
             '$schema'     => 'https://docs.commongateway.nl/schemas/ActionHandler.schema.json',
-            'title'       => 'ZgwToOpenBelasting ActionHandler',
+            'title'       => 'OpenBelasting ActionHandler',
             'description' => 'This handler returns a welcoming string',
             'required'    => [],
             'properties'  => [],

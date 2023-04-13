@@ -1,13 +1,13 @@
-# CommonGateway\ZgwToOpenBelastingBundle\Service\ZgwToOpenBelastingService
+# CommonGateway\OpenBelastingBundle\Service\OpenBelastingService
 
 ## Methods
 
 | Name | Description |
 |------|-------------|
-|[\_\_construct](#zgwtoopenbelastingservice__construct)||
-|[zgwToOpenBelastingHandler](#zgwtoopenbelastingservicezgwtoopenbelastinghandler)|An example handler that is triggered by an action.|
+|[\_\_construct](#openbelastingservice__construct)||
+|[OpenBelastingHandler](#openbelastingserviceopenbelastinghandler)|An example handler that is triggered by an action.|
 
-### ZgwToOpenBelastingService::\_\_construct
+### OpenBelastingService::\_\_construct
 
 **Description**
 
@@ -25,12 +25,12 @@
 
 <hr />
 
-### ZgwToOpenBelastingService::zgwToOpenBelastingHandler
+### OpenBelastingService::OpenBelastingHandler
 
 **Description**
 
 ```php
-public zgwToOpenBelastingHandler (array $data, array $configuration)
+public OpenBelastingHandler (array $data, array $configuration)
 ```
 
 An example handler that is triggered by an action.

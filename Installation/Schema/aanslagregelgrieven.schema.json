@@ -1,0 +1,25 @@
+{
+  "$id": "https://openbelasting.nl/schemas/openblasting.aanslagregelgrieven.schema.json",
+  "$schema": "https://docs.commongateway.nl/schemas/Entity.schema.json",
+  "version": "0.1",
+  "title": "AanslagRegelGrieven",
+  "type": "object",
+  "required": [
+    "belastingplichtnummer",
+    "grieven"
+  ],
+  "properties": {
+    "belastingplichtnummer": {
+      "pattern": "[0-9]{13}",
+      "type": "string",
+      "description": "Het nummer van de belastingplicht/aanslagregel waartegen bezwaar gemaakt wordt. Let op, voorloopnullen!",
+      "example": "0000000091017"
+    },
+    "grieven": {
+      "type": "array",
+      "description": "Lijst van grieven over deze aanslagregel",
+      "items": {"$ref": "#/components/schemas/Grief"}
+    }
+  },
+  "description": "aanslagregel met een of meer grieven"
+}

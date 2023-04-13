@@ -1,0 +1,17 @@
+{
+  "$id": "https://openbelasting.nl/schemas/openblasting.belastingplichtige.schema.json",
+  "$schema": "https://docs.commongateway.nl/schemas/Entity.schema.json",
+  "version": "0.1",
+  "title": "Belastingplichtige",
+  "required": ["burgerservicenummer"],
+  "type": "object",
+  "properties": {
+    "burgerservicenummer": {
+      "pattern": "[0-9]{9}",
+      "type": "string",
+      "description": "burgerservicenummer",
+      "example": "123456789"
+    }
+  },
+  "description": "burgerservicenummer van de belastingplichtige die betrokken is bij deze belastingaanslag."
+}

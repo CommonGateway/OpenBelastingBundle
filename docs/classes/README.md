@@ -1,4 +1,4 @@
-# CommonGateway\ZgwToOpenBelastingBundle
+# CommonGateway\OpenBelastingBundle
 
 *   [Service\InstallationService](Service/InstallationService.md)
-*   [Service\ZgwToOpenBelastingService](Service/ZgwToOpenBelastingService.md)
+*   [Service\OpenBelastingService](Service/OpenBelastingService.md)

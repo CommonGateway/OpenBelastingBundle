@@ -1,0 +1,25 @@
+{
+  "$id": "https://openbelasting.nl/schemas/openblasting.grief.schema.json",
+  "$schema": "https://docs.commongateway.nl/schemas/Entity.schema.json",
+  "version": "0.1",
+  "title": "Grief",
+"required": [
+    "soortGrief",
+    "toelichtingGrief"
+],
+"type": "object",
+"properties": {
+    "soortGrief": {
+        "pattern": "[0-9]{1,4}",
+        "type": "string",
+        "description": "Het griefsoort",
+        "example": "1"
+    },
+    "toelichtingGrief": {
+        "type": "string",
+        "description": "De toelichting van de grief",
+        "example": "Mijnsinziens is de WOZ beschikking niet reëel. Voorheen grensde mijn voortuin aan de snelweg, echter na de recente verbreding grenst nu mijn voordeur aan de snelweg. Deze situatie verandering komt niet tot uitdrukking in de WOZ beschikking."
+    }
+},
+"description": "Combinatie van grief soort en grief toelichting"
+}

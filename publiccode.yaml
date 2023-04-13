@@ -1,6 +1,6 @@
 publiccodeYmlVersion: "0.1"
-name: "ZgwToOpenBelasting"
-url: "https://github.com/CommonGateway/ZgwToOpenBelasting"
+name: "OpenBelasting"
+url: "https://github.com/CommonGateway/OpenBelasting"
 releaseDate: "2022-10-01"
 softwareType: addon
 
@@ -14,6 +14,6 @@ categories:
 developmentStatus: beta
 description:
   nl:
-    shortDescription: "ZgwToOpenBelasting"
+    shortDescription: "OpenBelasting"
   en:
-    shortDescription: "ZgwToOpenBelasting"
+    shortDescription: "OpenBelasting"

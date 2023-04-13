@@ -6,11 +6,11 @@
  * @license EUPL-1.2 https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
  */
 
-namespace CommonGateway\ZgwToOpenBelastingBundle;
+namespace CommonGateway\OpenBelastingBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class ZgwToOpenBelastingBundle extends Bundle
+class OpenBelastingBundle extends Bundle
 {
 
 
