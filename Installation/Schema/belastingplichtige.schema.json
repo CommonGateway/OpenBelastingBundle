@@ -13,7 +13,8 @@
       "pattern": "[0-9]{9}",
       "type": "string",
       "description": "burgerservicenummer",
-      "example": "123456789"
+      "example": "123456789",
+      "searchable": true
     }
   }
 }
