@@ -23,5 +23,5 @@
         "$ref": "https://openbelasting.nl/schemas/openblasting.grief.schema.json"
       }
     }
-  },
+  }
 }
