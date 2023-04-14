@@ -3,24 +3,26 @@
   "$schema": "https://docs.commongateway.nl/schemas/Entity.schema.json",
   "version": "0.1",
   "title": "BeschikkingsRegelGrieven",
+  "description": "beschikkingsregel met een of meer grieven",
+  "type": "object",
   "required": [
     "grieven",
     "sleutelBeschikkingsregel"
-    ],
-    "type": "object",
-    "properties": {
-        "sleutelBeschikkingsregel": {
-            "maxLength": 40,
-            "minLength": 1,
-            "type": "string",
-            "description": "De sleutel van de beschikkingsregel waartegen bezwaar gemaakt wordt.",
-            "example": "2008-aap-000001755"
-        },
-        "grieven": {
-            "type": "array",
-            "description": "Lijst van grieven over deze beschikkingsregel",
-            "items": {"$ref": "#/components/schemas/Grief"}
-        }
+  ],
+  "properties": {
+    "sleutelBeschikkingsregel": {
+      "maxLength": 40,
+      "minLength": 1,
+      "type": "string",
+      "description": "De sleutel van de beschikkingsregel waartegen bezwaar gemaakt wordt.",
+      "example": "2008-aap-000001755"
     },
-    "description": "beschikkingsregel met een of meer grieven"
+    "grieven": {
+      "type": "array",
+      "description": "Lijst van grieven over deze beschikkingsregel",
+      "items": {
+        "$ref": "https://openbelasting.nl/schemas/openblasting.grief.schema.json"
+      }
+    }
+  }
 }

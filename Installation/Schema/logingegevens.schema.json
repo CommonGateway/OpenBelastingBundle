@@ -3,20 +3,20 @@
   "$schema": "https://docs.commongateway.nl/schemas/Entity.schema.json",
   "version": "0.1",
   "title": "LoginGegevens",
+  "description": "De login gegevens van een gebruiker",
+  "type": "object",
   "required": [
     "client_id",
     "client_secret"
-],
-"type": "object",
-"properties": {
+  ],
+  "properties": {
     "client_id": {
-        "type": "string",
-        "description": "De gebruikersnaam"
+      "type": "string",
+      "description": "De gebruikersnaam"
     },
     "client_secret": {
-        "type": "string",
-        "description": "Het geheim wat enkel de gebruiker kent"
+      "type": "string",
+      "description": "Het geheim wat enkel de gebruiker kent"
     }
-},
-"description": "De login gegevens van een gebruiker"
+  }
 }

@@ -3,14 +3,16 @@
   "$schema": "https://docs.commongateway.nl/schemas/Entity.schema.json",
   "version": "0.1",
   "title": "Autorisatie",
-  "required": ["accessToken"],
-                "type": "object",
-                "properties": {
-                    "accessToken": {
-                        "type": "string",
-                        "description": "Het JWT token",
-                        "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
-                    }
-                },
-                "description": "De autorisatie"
+  "description": "De autorisatie",
+  "type": "object",
+  "required": [
+    "accessToken"
+  ],
+  "properties": {
+    "accessToken": {
+      "type": "string",
+      "description": "Het JWT token",
+      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+    }
+  }
 }

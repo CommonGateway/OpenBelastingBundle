@@ -3,6 +3,7 @@
   "$schema": "https://docs.commongateway.nl/schemas/Entity.schema.json",
   "version": "0.1",
   "title": "AanslagRegelGrieven",
+  "description": "aanslagregel met een of meer grieven",
   "type": "object",
   "required": [
     "belastingplichtnummer",
@@ -18,8 +19,9 @@
     "grieven": {
       "type": "array",
       "description": "Lijst van grieven over deze aanslagregel",
-      "items": {"$ref": "#/components/schemas/Grief"}
+      "items": {
+        "$ref": "https://openbelasting.nl/schemas/openblasting.grief.schema.json"
+      }
     }
   },
-  "description": "aanslagregel met een of meer grieven"
 }

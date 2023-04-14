@@ -3,6 +3,8 @@
   "$schema": "https://docs.commongateway.nl/schemas/Entity.schema.json",
   "version": "0.1",
   "title": "AanslagRegel",
+  "description": "De inhoud van een aanslagregel",
+  "type": "object",
   "required": [
     "bedrag",
     "belastingJaar",
@@ -13,76 +15,76 @@
     "heffingsgrondslag",
     "ingangsdatum",
     "omschrijvingBelastingsoort"
-],
-"type": "object",
-"properties": {
+  ],
+  "properties": {
     "belastingplichtnummer": {
-        "pattern": "[0-9]{13}",
-        "type": "string",
-        "description": "Het nummer van de belastingplicht/aanslagregel waartegen bezwaar gemaakt wordt. Let op, voorloopnullen!",
-        "example": "0000000091017"
+      "pattern": "[0-9]{13}",
+      "type": "string",
+      "description": "Het nummer van de belastingplicht/aanslagregel waartegen bezwaar gemaakt wordt. Let op, voorloopnullen!",
+      "example": "0000000091017"
     },
     "belastingJaar": {
-        "pattern": "[0-9]{4}",
-        "type": "string",
-        "description": "Het jaar van de belastingcombinatie",
-        "example": "2021"
+      "pattern": "[0-9]{4}",
+      "type": "string",
+      "description": "Het jaar van de belastingcombinatie",
+      "example": "2021"
     },
     "codeBelastingsoort": {
-        "pattern": "[0-9]{1,2}",
-        "type": "string",
-        "description": "Code van de belastingsoort",
-        "example": "4"
+      "pattern": "[0-9]{1,2}",
+      "type": "string",
+      "description": "Code van de belastingsoort",
+      "example": "4"
     },
     "omschrijvingBelastingsoort": {
-        "maxLength": 30,
-        "minLength": 1,
-        "type": "string",
-        "description": "Omschrijving van de belastingsoort",
-        "example": "Afvalstoffenheffing"
+      "maxLength": 30,
+      "minLength": 1,
+      "type": "string",
+      "description": "Omschrijving van de belastingsoort",
+      "example": "Afvalstoffenheffing"
     },
     "ingangsdatum": {
-        "pattern": "[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])",
-        "type": "string",
-        "description": "De ingangsdatum",
-        "format": "date",
-        "example": "2022-12-30"
+      "pattern": "[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])",
+      "type": "string",
+      "description": "De ingangsdatum",
+      "format": "date",
+      "example": "2022-12-30"
     },
     "einddatum": {
-        "pattern": "[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])",
-        "type": "string",
-        "description": "De einddatum",
-        "format": "date",
-        "example": "2022-12-30"
+      "pattern": "[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])",
+      "type": "string",
+      "description": "De einddatum",
+      "format": "date",
+      "example": "2022-12-30"
     },
     "wozObjectnummer": {
-        "pattern": "[0-9]{12}",
-        "type": "string",
-        "description": "Nummer van het wozObject",
-        "example": "123456789012"
+      "pattern": "[0-9]{12}",
+      "type": "string",
+      "description": "Nummer van het wozObject",
+      "example": "123456789012"
     },
     "heffingsgrondslag": {
-        "pattern": "[0-9]{1,13},[0-9]{2}",
-        "type": "string",
-        "description": "De grondslag van de heffing",
-        "example": "196000,00"
+      "pattern": "[0-9]{1,13},[0-9]{2}",
+      "type": "string",
+      "description": "De grondslag van de heffing",
+      "example": "196000,00"
     },
     "bedrag": {
-        "pattern": "[0-9]{1,13},[0-9]{2}",
-        "type": "string",
-        "description": "Het totaalbedrag van deze aanslagregel",
-        "example": "300,00"
+      "pattern": "[0-9]{1,13},[0-9]{2}",
+      "type": "string",
+      "description": "Het totaalbedrag van deze aanslagregel",
+      "example": "300,00"
     },
     "bezwaarMogelijk": {
-        "type": "boolean",
-        "description": "Indicatie of bezwaar mogelijk is op deze aanslagregel",
-        "example": true
+      "type": "boolean",
+      "description": "Indicatie of bezwaar mogelijk is op deze aanslagregel",
+      "example": true
     },
     "adres": {
-        "type": "array",
-        "description": "Het adres van het woz object",
-        "items": {"$ref": "#/components/schemas/Adres"}
+      "type": "array",
+      "description": "Het adres van het woz object",
+      "items": {
+        "$ref": "https://openbelasting.nl/schemas/openblasting.adres.schema.json"
+      }
     }
-},
-"description": "De inhoud van een aanslagregel"
+  }
 }

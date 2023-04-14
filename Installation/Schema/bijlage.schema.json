@@ -3,32 +3,32 @@
   "$schema": "https://docs.commongateway.nl/schemas/Entity.schema.json",
   "version": "0.1",
   "title": "Bijlage",
+  "description": "Een bijlage bestand bestaande uit een naam, type en inhoud",
+  "type": "object",
   "required": [
     "bestand",
     "naamBestand",
     "typeBestand"
-],
-"type": "object",
-"properties": {
+  ],
+  "properties": {
     "naamBestand": {
-        "maxLength": 500,
-        "minLength": 1,
-        "type": "string",
-        "description": "De bestandsnaam van deze bijlage, zonder extensie.",
-        "example": "situatie-foto-1"
+      "maxLength": 500,
+      "minLength": 1,
+      "type": "string",
+      "description": "De bestandsnaam van deze bijlage, zonder extensie.",
+      "example": "situatie-foto-1"
     },
     "typeBestand": {
-        "maxLength": 150,
-        "minLength": 1,
-        "type": "string",
-        "description": "De extensie van de bestandsnaam",
-        "example": "jpeg"
+      "maxLength": 150,
+      "minLength": 1,
+      "type": "string",
+      "description": "De extensie van de bestandsnaam",
+      "example": "jpeg"
     },
     "bestand": {
-        "type": "string",
-        "description": "Inhoud van het bestand, base64 encoded",
-        "example": "RGF0IHdhcyB0aWpkdmVyc3BpbGxpbmcuLi4="
+      "type": "string",
+      "description": "Inhoud van het bestand, base64 encoded",
+      "example": "RGF0IHdhcyB0aWpkdmVyc3BpbGxpbmcuLi4="
     }
-},
-"description": "Een bijlage bestand bestaande uit een naam, type en inhoud"
+  }
 }

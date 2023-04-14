@@ -3,8 +3,11 @@
   "$schema": "https://docs.commongateway.nl/schemas/Entity.schema.json",
   "version": "0.1",
   "title": "Belastingplichtige",
-  "required": ["burgerservicenummer"],
+  "description": "burgerservicenummer van de belastingplichtige die betrokken is bij deze belastingaanslag.",
   "type": "object",
+  "required": [
+    "burgerservicenummer"
+  ],
   "properties": {
     "burgerservicenummer": {
       "pattern": "[0-9]{9}",
@@ -12,6 +15,5 @@
       "description": "burgerservicenummer",
       "example": "123456789"
     }
-  },
-  "description": "burgerservicenummer van de belastingplichtige die betrokken is bij deze belastingaanslag."
+  }
 }

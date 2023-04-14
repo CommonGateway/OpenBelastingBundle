@@ -3,6 +3,8 @@
   "$schema": "https://docs.commongateway.nl/schemas/Entity.schema.json",
   "version": "0.1",
   "title": "Aanslagbiljet",
+  "description": "Bevat de informatie die nodig is om een bezwaar aanvraag in te dienen",
+  "type": "object",
   "required": [
     "aanslagbiljetnummer",
     "aanslagbiljetvolgnummer",
@@ -13,63 +15,67 @@
     "bezwaarMogelijk",
     "dagtekening",
     "totaalbedragAanslag"
-],
-"type": "object",
-"properties": {
+  ],
+  "properties": {
     "aanslagbiljetnummer": {
-        "pattern": "[0-9]{13}",
-        "type": "string",
-        "description": "Het nummer van het aanslagbiljet waartegen bezwaar gemaakt wordt. Let op, voorloopnullen!",
-        "example": "0000003255468"
+      "pattern": "[0-9]{13}",
+      "type": "string",
+      "description": "Het nummer van het aanslagbiljet waartegen bezwaar gemaakt wordt. Let op, voorloopnullen!",
+      "example": "0000003255468"
     },
     "aanslagbiljetvolgnummer": {
-        "pattern": "[0-9]{2}",
-        "type": "string",
-        "description": "Het volgnummer van het aanslagbiljet waartegen bezwaar gemaakt wordt. Let op, voorloopnul!",
-        "example": "01"
+      "pattern": "[0-9]{2}",
+      "type": "string",
+      "description": "Het volgnummer van het aanslagbiljet waartegen bezwaar gemaakt wordt. Let op, voorloopnul!",
+      "example": "01"
     },
     "dagtekening": {
-        "pattern": "[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])",
-        "type": "string",
-        "description": "De datum waarop de aanslag opgelegd werd.",
-        "format": "date",
-        "example": "2022-12-30"
+      "pattern": "[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])",
+      "type": "string",
+      "description": "De datum waarop de aanslag opgelegd werd.",
+      "format": "date",
+      "example": "2022-12-30"
     },
     "belastingJaar": {
-        "pattern": "[0-9]{4}",
-        "type": "string",
-        "description": "Het jaar van de belastingcombinatie",
-        "example": "2022"
+      "pattern": "[0-9]{4}",
+      "type": "string",
+      "description": "Het jaar van de belastingcombinatie",
+      "example": "2022"
     },
     "belastingsoortcombinatie": {
-        "maxLength": 30,
-        "minLength": 1,
-        "type": "string",
-        "description": "Omschrijving van de belastingsoortcombinatie",
-        "example": "Gemeentelijke belastingen 2022"
+      "maxLength": 30,
+      "minLength": 1,
+      "type": "string",
+      "description": "Omschrijving van de belastingsoortcombinatie",
+      "example": "Gemeentelijke belastingen 2022"
     },
     "totaalbedragAanslag": {
-        "pattern": "[0-9]{1,13},[0-9]{2}",
-        "type": "string",
-        "description": "Het totaalbedrag van deze aanslag",
-        "example": "15,20"
+      "pattern": "[0-9]{1,13},[0-9]{2}",
+      "type": "string",
+      "description": "Het totaalbedrag van deze aanslag",
+      "example": "15,20"
     },
     "bezwaarMogelijk": {
-        "type": "boolean",
-        "description": "Indicatie of bezwaar mogelijk is",
-        "example": true
+      "type": "boolean",
+      "description": "Indicatie of bezwaar mogelijk is",
+      "example": true
     },
-    "belastingplichtige": {"$ref": "#/components/schemas/Belastingplichtige"},
+    "belastingplichtige": {
+      "$ref": "https://openbelasting.nl/schemas/openblasting.belastingplichtige.schema.json"
+    },
     "aanslagregels": {
-        "type": "array",
-        "description": "Lijst van aanslagregels",
-        "items": {"$ref": "#/components/schemas/AanslagRegel"}
+      "type": "array",
+      "description": "Lijst van aanslagregels",
+      "items": {
+        "$ref": "https://openbelasting.nl/schemas/openblasting.aanslagregel.schema.json"
+      }
     },
     "beschikkingsregels": {
-        "type": "array",
-        "description": "Lijst van beschikkingsregels",
-        "items": {"$ref": "#/components/schemas/Beschikkingsregel"}
+      "type": "array",
+      "description": "Lijst van beschikkingsregels",
+      "items": {
+        "$ref": "https://openbelasting.nl/schemas/openblasting.beschikkingsregel.schema.json"
+      }
     }
-},
-"description": "Bevat de informatie die nodig is om een bezwaar aanvraag in te dienen"
+  }
 }
