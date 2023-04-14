@@ -53,14 +53,14 @@
       "type": "array",
       "description": "Lijst van aanslagregels waartegen bezwaar gemaakt wordt, inclusief de grieven.",
       "items": {
-        "$ref": "https://openbelasting.nl/schemas/openblasting.aanslagregel.schema.jsonGrieven"
+        "$ref": "https://openbelasting.nl/schemas/openblasting.aanslagregel.schema.json"
       }
     },
     "beschikkingsregels": {
       "type": "array",
       "description": "Lijst van beschikkingsregels waartegen bezwaar gemaakt wordt, inclusief de grieven.",
       "items": {
-        "$ref": "https://openbelasting.nl/schemas/openblasting.beschikkingsregel.schema.jsonGrieven"
+        "$ref": "https://openbelasting.nl/schemas/openblasting.beschikkingsregel.schema.json"
       }
     },
     "bijlagen": {
