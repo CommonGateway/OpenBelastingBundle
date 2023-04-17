@@ -14,7 +14,7 @@ use CommonGateway\CoreBundle\Service\CallService;
 use App\Service\SynchronizationService;
 use Exception;
 
-class SyncAanslagenHandler
+class SyncAanslagenService
 {
 
     /**
@@ -99,12 +99,12 @@ class SyncAanslagenHandler
     /**
      * An example handler that is triggered by an action.
      *
-     * @param array $data          The data array
-     * @param array $configuration The configuration array
+     * @param array|null $data          The data array
+     * @param array|null $configuration The configuration array
      *
      * @return array A handler must ALWAYS return an array
      */
-    public function syncAanslagenHandler(array $data, array $configuration): array
+    public function syncAanslagenHandler(?array $data = [], ?array $configuration = []): array
     {
         $this->data          = $data;
         $this->configuration = $configuration;
