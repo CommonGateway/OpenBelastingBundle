@@ -46,7 +46,7 @@
             "aanslagbiljetvolgnummer": "02",
             "gehoordWorden": true,
             "belastingplichtige": {
-                "burgerservicenummer": "123456789"
+                "burgerservicenummer": "987654321"
             },
             "aanslagregels": [
                 {
@@ -85,7 +85,7 @@
             "aanslagbiljetvolgnummer": "03",
             "gehoordWorden": true,
             "belastingplichtige": {
-                "burgerservicenummer": "123456789"
+                "burgerservicenummer": "123498765"
             },
             "aanslagregels": [
                 {
