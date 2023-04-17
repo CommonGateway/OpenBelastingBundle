@@ -104,7 +104,7 @@ class SyncAanslagenService
      *
      * @return array A handler must ALWAYS return an array
      */
-    public function syncAanslagenHandler(?array $data = [], ?array $configuration = []): array
+    public function syncAanslagenHandler(?array $data=[], ?array $configuration=[]): array
     {
         $this->data          = $data;
         $this->configuration = $configuration;

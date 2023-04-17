@@ -36,6 +36,7 @@ class SyncAanslagenCommando extends Command
      */
     private SyncAanslagenService $syncAanslagenService;
 
+
     /**
      * Class constructor.
      *
