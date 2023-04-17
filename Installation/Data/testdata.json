@@ -1,0 +1,121 @@
+{
+    "https://openbelasting.nl/schemas/openblasting.aanslagbiljet.schema.json": [
+        {
+            "aanvraagnummer": "100293",
+            "aanvraagdatum": "2022-12-30",
+            "aanslagbiljetnummer": "0000003255468",
+            "aanslagbiljetvolgnummer": "01",
+            "gehoordWorden": true,
+            "belastingplichtige": {
+                "burgerservicenummer": "123456789"
+            },
+            "aanslagregels": [
+                {
+                    "belastingplichtnummer": "0000000091017",
+                    "grieven": [
+                    {
+                        "soortGrief": "1",
+                        "toelichtingGrief": "Mijnsinziens is de WOZ beschikking niet reëel. Voorheen grensde mijn voortuin aan de snelweg, echter na de recente verbreding grenst nu mijn voordeur aan de snelweg. Deze situatie verandering komt niet tot uitdrukking in de WOZ beschikking."
+                    }
+                    ]
+                }
+            ],
+            "beschikkingsregels": [
+                {
+                    "sleutelBeschikkingsregel": "2008-aap-000001755",
+                    "grieven": [
+                        {
+                            "soortGrief": "1",
+                            "toelichtingGrief": "Mijnsinziens is de WOZ beschikking niet reëel. Voorheen grensde mijn voortuin aan de snelweg, echter na de recente verbreding grenst nu mijn voordeur aan de snelweg. Deze situatie verandering komt niet tot uitdrukking in de WOZ beschikking."
+                        }
+                    ]
+                }
+            ],
+            "bijlagen": [
+                {
+                    "naamBestand": "situatie-foto-1",
+                    "typeBestand": "jpeg",
+                    "bestand": "RGF0IHdhcyB0aWpkdmVyc3BpbGxpbmcuLi4="
+                }
+            ]
+        },
+        {
+            "aanvraagnummer": "100432",
+            "aanvraagdatum": "2022-09-12",
+            "aanslagbiljetnummer": "0000003255678",
+            "aanslagbiljetvolgnummer": "02",
+            "gehoordWorden": true,
+            "belastingplichtige": {
+                "burgerservicenummer": "123456789"
+            },
+            "aanslagregels": [
+                {
+                    "belastingplichtnummer": "0000000091020",
+                    "grieven": [
+                    {
+                        "soortGrief": "1",
+                        "toelichtingGrief": "Mijnsinziens is de WOZ beschikking niet reëel. Voorheen grensde mijn voortuin aan de snelweg, echter na de recente verbreding grenst nu mijn voordeur aan de snelweg. Deze situatie verandering komt niet tot uitdrukking in de WOZ beschikking."
+                    }
+                    ]
+                }
+            ],
+            "beschikkingsregels": [
+                {
+                    "sleutelBeschikkingsregel": "2008-aap-000001755",
+                    "grieven": [
+                        {
+                            "soortGrief": "1",
+                            "toelichtingGrief": "Mijnsinziens is de WOZ beschikking niet reëel. Voorheen grensde mijn voortuin aan de snelweg, echter na de recente verbreding grenst nu mijn voordeur aan de snelweg. Deze situatie verandering komt niet tot uitdrukking in de WOZ beschikking."
+                        }
+                    ]
+                }
+            ],
+            "bijlagen": [
+                {
+                    "naamBestand": "situatie-foto-2",
+                    "typeBestand": "jpeg",
+                    "bestand": "RGF0IHdhcyB0aWpkdmVyc3BpasdfgghcuLi4="
+                }
+            ]
+        },
+        {
+            "aanvraagnummer": "200535",
+            "aanvraagdatum": "2021-09-15",
+            "aanslagbiljetnummer": "0000003255935",
+            "aanslagbiljetvolgnummer": "03",
+            "gehoordWorden": true,
+            "belastingplichtige": {
+                "burgerservicenummer": "123456789"
+            },
+            "aanslagregels": [
+                {
+                    "belastingplichtnummer": "00000000910124",
+                    "grieven": [
+                    {
+                        "soortGrief": "1",
+                        "toelichtingGrief": "Mijnsinziens is de WOZ beschikking niet reëel. Voorheen grensde mijn voortuin aan de snelweg, echter na de recente verbreding grenst nu mijn voordeur aan de snelweg. Deze situatie verandering komt niet tot uitdrukking in de WOZ beschikking."
+                    }
+                    ]
+                }
+            ],
+            "beschikkingsregels": [
+                {
+                    "sleutelBeschikkingsregel": "2008-aap-000001765",
+                    "grieven": [
+                        {
+                            "soortGrief": "1",
+                            "toelichtingGrief": "Mijnsinziens is de WOZ beschikking niet reëel. Voorheen grensde mijn voortuin aan de snelweg, echter na de recente verbreding grenst nu mijn voordeur aan de snelweg. Deze situatie verandering komt niet tot uitdrukking in de WOZ beschikking."
+                        }
+                    ]
+                }
+            ],
+            "bijlagen": [
+                {
+                    "naamBestand": "situatie-foto-3",
+                    "typeBestand": "jpeg",
+                    "bestand": "RGF0IHdhcyB0aWpkdmVyc3BpasdfgasdfgLi4="
+                }
+            ]
+        }
+    ]
+}
