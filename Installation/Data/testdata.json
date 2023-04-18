@@ -9,6 +9,11 @@
             "belastingplichtige": {
                 "burgerservicenummer": "123456789"
             },
+            "belastingJaar": "2022",
+            "belastingsoortcombinatie": "Gemeentelijke belastingen 2022",
+            "bezwaarMogelijk": true,
+            "dagtekening": "2022-12-30",
+            "totaalbedragAanslag": "15,20",
             "aanslagregels": [
                 {
                     "belastingplichtnummer": "0000000091017",
@@ -17,7 +22,14 @@
                         "soortGrief": "1",
                         "toelichtingGrief": "Mijnsinziens is de WOZ beschikking niet reëel. Voorheen grensde mijn voortuin aan de snelweg, echter na de recente verbreding grenst nu mijn voordeur aan de snelweg. Deze situatie verandering komt niet tot uitdrukking in de WOZ beschikking."
                     }
-                    ]
+                    ],
+                    "belastingJaar": "2021",
+                    "bezwaarMogelijk": true,
+                    "codeBelastingsoort": "4",
+                    "einddatum": "2022-12-30",
+                    "heffingsgrondslag": "196000,00",
+                    "ingangsdatum": "2022-12-30",
+                    "omschrijvingBelastingsoort": "Afvalstoffenheffing"
                 }
             ],
             "beschikkingsregels": [
@@ -28,7 +40,19 @@
                             "soortGrief": "1",
                             "toelichtingGrief": "Mijnsinziens is de WOZ beschikking niet reëel. Voorheen grensde mijn voortuin aan de snelweg, echter na de recente verbreding grenst nu mijn voordeur aan de snelweg. Deze situatie verandering komt niet tot uitdrukking in de WOZ beschikking."
                         }
-                    ]
+                    ],
+                    "bezwaarMogelijk": true,
+                    "vastgesteldeWaarde": 10000,
+                    "wozObjectnummer": "123456789012",
+                    "adres": {
+                        "postcode": "1234AB",
+                        "woonplaatsnaam": "Demodam",
+                        "straatnaam": "Demostraat",
+                        "huisnummer": "7",
+                        "huisletter": "A",
+                        "huisnumertoevoeging": null,
+                        "locatieomschrijving": "Appartement"
+                    }
                 }
             ],
             "bijlagen": [
@@ -48,6 +72,11 @@
             "belastingplichtige": {
                 "burgerservicenummer": "123456789"
             },
+            "belastingJaar": "2022",
+            "belastingsoortcombinatie": "Gemeentelijke belastingen 2022",
+            "bezwaarMogelijk": true,
+            "dagtekening": "2022-12-30",
+            "totaalbedragAanslag": "30,20",
             "aanslagregels": [
                 {
                     "belastingplichtnummer": "0000000091020",
@@ -56,7 +85,14 @@
                         "soortGrief": "1",
                         "toelichtingGrief": "Mijnsinziens is de WOZ beschikking niet reëel. Voorheen grensde mijn voortuin aan de snelweg, echter na de recente verbreding grenst nu mijn voordeur aan de snelweg. Deze situatie verandering komt niet tot uitdrukking in de WOZ beschikking."
                     }
-                    ]
+                    ],
+                    "belastingJaar": "2021",
+                    "bezwaarMogelijk": true,
+                    "codeBelastingsoort": "4",
+                    "einddatum": "2022-12-30",
+                    "heffingsgrondslag": "196000,00",
+                    "ingangsdatum": "2022-12-30",
+                    "omschrijvingBelastingsoort": "Afvalstoffenheffing"
                 }
             ],
             "beschikkingsregels": [
@@ -67,7 +103,19 @@
                             "soortGrief": "1",
                             "toelichtingGrief": "Mijnsinziens is de WOZ beschikking niet reëel. Voorheen grensde mijn voortuin aan de snelweg, echter na de recente verbreding grenst nu mijn voordeur aan de snelweg. Deze situatie verandering komt niet tot uitdrukking in de WOZ beschikking."
                         }
-                    ]
+                    ],
+                    "bezwaarMogelijk": true,
+                    "vastgesteldeWaarde": 10000,
+                    "wozObjectnummer": "123456789012",
+                    "adres": {
+                        "postcode": "1234AB",
+                        "woonplaatsnaam": "Demodam",
+                        "straatnaam": "Demostraat",
+                        "huisnummer": "7",
+                        "huisletter": "A",
+                        "huisnumertoevoeging": null,
+                        "locatieomschrijving": "Appartement"
+                    }
                 }
             ],
             "bijlagen": [
@@ -87,6 +135,11 @@
             "belastingplichtige": {
                 "burgerservicenummer": "987654321"
             },
+            "belastingJaar": "2022",
+            "belastingsoortcombinatie": "Gemeentelijke belastingen 2022",
+            "bezwaarMogelijk": true,
+            "dagtekening": "2022-12-30",
+            "totaalbedragAanslag": "45,20",
             "aanslagregels": [
                 {
                     "belastingplichtnummer": "00000000910124",
@@ -95,7 +148,14 @@
                         "soortGrief": "1",
                         "toelichtingGrief": "Mijnsinziens is de WOZ beschikking niet reëel. Voorheen grensde mijn voortuin aan de snelweg, echter na de recente verbreding grenst nu mijn voordeur aan de snelweg. Deze situatie verandering komt niet tot uitdrukking in de WOZ beschikking."
                     }
-                    ]
+                    ],
+                    "belastingJaar": "2021",
+                    "bezwaarMogelijk": true,
+                    "codeBelastingsoort": "4",
+                    "einddatum": "2022-12-30",
+                    "heffingsgrondslag": "196000,00",
+                    "ingangsdatum": "2022-12-30",
+                    "omschrijvingBelastingsoort": "Afvalstoffenheffing"
                 }
             ],
             "beschikkingsregels": [
@@ -106,7 +166,19 @@
                             "soortGrief": "1",
                             "toelichtingGrief": "Mijnsinziens is de WOZ beschikking niet reëel. Voorheen grensde mijn voortuin aan de snelweg, echter na de recente verbreding grenst nu mijn voordeur aan de snelweg. Deze situatie verandering komt niet tot uitdrukking in de WOZ beschikking."
                         }
-                    ]
+                    ],
+                    "bezwaarMogelijk": true,
+                    "vastgesteldeWaarde": 10000,
+                    "wozObjectnummer": "123456789012",
+                    "adres": {
+                        "postcode": "1234AB",
+                        "woonplaatsnaam": "Demodam",
+                        "straatnaam": "Demostraat",
+                        "huisnummer": "7",
+                        "huisletter": "A",
+                        "huisnumertoevoeging": null,
+                        "locatieomschrijving": "Appartement"
+                    }
                 }
             ],
             "bijlagen": [
