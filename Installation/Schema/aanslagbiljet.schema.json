@@ -21,7 +21,8 @@
       "pattern": "[0-9]{13}",
       "type": "string",
       "description": "Het nummer van het aanslagbiljet waartegen bezwaar gemaakt wordt. Let op, voorloopnullen!",
-      "example": "0000003255468"
+      "example": "0000003255468",
+      "searchable": true
     },
     "aanslagbiljetvolgnummer": {
       "pattern": "[0-9]{2}",
