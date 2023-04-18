@@ -24,7 +24,7 @@
                     "heffingsgrondslag": "196000,00",
                     "ingangsdatum": "2022-12-30",
                     "omschrijvingBelastingsoort": "Afvalstoffenheffing",
-                    "adres": {
+                    "adres": [{
                         "postcode": "1234AB",
                         "woonplaatsnaam": "Demodam",
                         "straatnaam": "Demostraat",
@@ -32,7 +32,7 @@
                         "huisletter": "A",
                         "huisnumertoevoeging": null,
                         "locatieomschrijving": "Appartement"
-                    }
+                    }]
                 }
             ],
             "beschikkingsregels": [
@@ -84,7 +84,7 @@
                     "heffingsgrondslag": "196000,00",
                     "ingangsdatum": "2022-12-30",
                     "omschrijvingBelastingsoort": "Afvalstoffenheffing",
-                    "adres": {
+                    "adres": [{
                         "postcode": "1234AB",
                         "woonplaatsnaam": "Demodam",
                         "straatnaam": "Demostraat",
@@ -92,7 +92,7 @@
                         "huisletter": "A",
                         "huisnumertoevoeging": null,
                         "locatieomschrijving": "Appartement"
-                    }
+                    }]
                 }
             ],
             "beschikkingsregels": [
@@ -144,7 +144,7 @@
                     "heffingsgrondslag": "196000,00",
                     "ingangsdatum": "2022-12-30",
                     "omschrijvingBelastingsoort": "Afvalstoffenheffing",
-                    "adres": {
+                    "adres": [{
                         "postcode": "1234AB",
                         "woonplaatsnaam": "Demodam",
                         "straatnaam": "Demostraat",
@@ -152,7 +152,7 @@
                         "huisletter": "A",
                         "huisnumertoevoeging": null,
                         "locatieomschrijving": "Appartement"
-                    }
+                    }]
                 }
             ],
             "beschikkingsregels": [
