@@ -66,7 +66,7 @@ class OpenBelastingHandler implements ActionHandlerInterface
      */
     public function run(array $data, array $configuration): array
     {
-        return $this->openBelastingService->OpenBelastingService($data, $configuration);
+        return $this->openBelastingService->openBelastingHandler($data, $configuration);
 
     }//end run()
 

@@ -3,40 +3,42 @@
   "$schema": "https://docs.commongateway.nl/schemas/Entity.schema.json",
   "version": "0.1",
   "title": "Beschikkingsregel",
+  "description": "De inhoud van een beschikkingsregel",
+  "type": "object",
   "required": [
     "bezwaarMogelijk",
     "sleutelBeschikkingsregel",
     "vastgesteldeWaarde",
     "wozObjectnummer"
-],
-"type": "object",
-"properties": {
+  ],
+  "properties": {
     "sleutelBeschikkingsregel": {
-        "maxLength": 40,
-        "minLength": 1,
-        "type": "string",
-        "description": "De sleutel van de beschikkingsregel",
-        "example": "abcd1234"
+      "maxLength": 40,
+      "minLength": 1,
+      "type": "string",
+      "description": "De sleutel van de beschikkingsregel",
+      "example": "abcd1234"
     },
     "wozObjectnummer": {
-        "pattern": "[0-9]{12}",
-        "type": "string",
-        "description": "Nummer van het wozObject",
-        "example": "123456789012"
+      "pattern": "[0-9]{12}",
+      "type": "string",
+      "description": "Nummer van het wozObject",
+      "example": "123456789012"
     },
     "vastgesteldeWaarde": {
-        "pattern": "[0-9]{1,11}",
-        "type": "integer",
-        "description": "De vastgestelde waarde van het woz object",
-        "format": "int64",
-        "example": 10000
+      "pattern": "[0-9]{1,11}",
+      "type": "integer",
+      "description": "De vastgestelde waarde van het woz object",
+      "format": "int64",
+      "example": 10000
     },
     "bezwaarMogelijk": {
-        "type": "boolean",
-        "description": "Indicatie of bezwaar mogelijk is op deze beschikkingsregel",
-        "example": true
+      "type": "boolean",
+      "description": "Indicatie of bezwaar mogelijk is op deze beschikkingsregel",
+      "example": true
     },
-    "adres": {"$ref": "#/components/schemas/Adres"}
-},
-"description": "De inhoud van een beschikkingsregel"
+    "adres": {
+      "$ref": "https://openbelasting.nl/schemas/openblasting.adres.schema.json"
+    }
+  }
 }

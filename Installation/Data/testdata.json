@@ -1,0 +1,184 @@
+{
+    "https://openbelasting.nl/schemas/openblasting.aanslagbiljet.schema.json": [
+        {
+            "aanvraagnummer": "100293",
+            "aanvraagdatum": "2022-12-30",
+            "aanslagbiljetnummer": "0000003255468",
+            "aanslagbiljetvolgnummer": "01",
+            "gehoordWorden": true,
+            "belastingplichtige": {
+                "burgerservicenummer": "123456789"
+            },
+            "belastingJaar": "2022",
+            "belastingsoortcombinatie": "Gemeentelijke belastingen 2022",
+            "bezwaarMogelijk": true,
+            "dagtekening": "2022-12-30",
+            "totaalbedragAanslag": "15,20",
+            "aanslagregels": [
+                {
+                    "belastingplichtnummer": "0000000091017",
+                    "belastingJaar": "2021",
+                    "bezwaarMogelijk": true,
+                    "codeBelastingsoort": "4",
+                    "einddatum": "2022-12-30",
+                    "heffingsgrondslag": "196000,00",
+                    "ingangsdatum": "2022-12-30",
+                    "omschrijvingBelastingsoort": "Afvalstoffenheffing",
+                    "adres": [{
+                        "postcode": "1234AB",
+                        "woonplaatsnaam": "Demodam",
+                        "straatnaam": "Demostraat",
+                        "huisnummer": "7",
+                        "huisletter": "A",
+                        "huisnumertoevoeging": null,
+                        "locatieomschrijving": "Appartement"
+                    }]
+                }
+            ],
+            "beschikkingsregels": [
+                {
+                    "sleutelBeschikkingsregel": "2008-aap-000001755",
+                    "bezwaarMogelijk": true,
+                    "vastgesteldeWaarde": 10000,
+                    "wozObjectnummer": "123456789012",
+                    "adres": {
+                        "postcode": "1234AB",
+                        "woonplaatsnaam": "Demodam",
+                        "straatnaam": "Demostraat",
+                        "huisnummer": "7",
+                        "huisletter": "A",
+                        "huisnumertoevoeging": null,
+                        "locatieomschrijving": "Appartement"
+                    }
+                }
+            ],
+            "bijlagen": [
+                {
+                    "naamBestand": "situatie-foto-1",
+                    "typeBestand": "jpeg",
+                    "bestand": "RGF0IHdhcyB0aWpkdmVyc3BpbGxpbmcuLi4="
+                }
+            ]
+        },
+        {
+            "aanvraagnummer": "100432",
+            "aanvraagdatum": "2022-09-12",
+            "aanslagbiljetnummer": "0000003255678",
+            "aanslagbiljetvolgnummer": "02",
+            "gehoordWorden": true,
+            "belastingplichtige": {
+                "burgerservicenummer": "123456789"
+            },
+            "belastingJaar": "2022",
+            "belastingsoortcombinatie": "Gemeentelijke belastingen 2022",
+            "bezwaarMogelijk": true,
+            "dagtekening": "2022-12-30",
+            "totaalbedragAanslag": "30,20",
+            "aanslagregels": [
+                {
+                    "belastingplichtnummer": "0000000091020",
+                    "belastingJaar": "2021",
+                    "bezwaarMogelijk": true,
+                    "codeBelastingsoort": "4",
+                    "einddatum": "2022-12-30",
+                    "heffingsgrondslag": "196000,00",
+                    "ingangsdatum": "2022-12-30",
+                    "omschrijvingBelastingsoort": "Afvalstoffenheffing",
+                    "adres": [{
+                        "postcode": "1234AB",
+                        "woonplaatsnaam": "Demodam",
+                        "straatnaam": "Demostraat",
+                        "huisnummer": "7",
+                        "huisletter": "A",
+                        "huisnumertoevoeging": null,
+                        "locatieomschrijving": "Appartement"
+                    }]
+                }
+            ],
+            "beschikkingsregels": [
+                {
+                    "sleutelBeschikkingsregel": "2008-aap-000001755",
+                    "bezwaarMogelijk": true,
+                    "vastgesteldeWaarde": 10000,
+                    "wozObjectnummer": "123456789012",
+                    "adres": {
+                        "postcode": "1234AB",
+                        "woonplaatsnaam": "Demodam",
+                        "straatnaam": "Demostraat",
+                        "huisnummer": "7",
+                        "huisletter": "A",
+                        "huisnumertoevoeging": null,
+                        "locatieomschrijving": "Appartement"
+                    }
+                }
+            ],
+            "bijlagen": [
+                {
+                    "naamBestand": "situatie-foto-2",
+                    "typeBestand": "jpeg",
+                    "bestand": "RGF0IHdhcyB0aWpkdmVyc3BpasdfgghcuLi4="
+                }
+            ]
+        },
+        {
+            "aanvraagnummer": "200535",
+            "aanvraagdatum": "2021-09-15",
+            "aanslagbiljetnummer": "0000003255935",
+            "aanslagbiljetvolgnummer": "03",
+            "gehoordWorden": true,
+            "belastingplichtige": {
+                "burgerservicenummer": "987654321"
+            },
+            "belastingJaar": "2022",
+            "belastingsoortcombinatie": "Gemeentelijke belastingen 2022",
+            "bezwaarMogelijk": true,
+            "dagtekening": "2022-12-30",
+            "totaalbedragAanslag": "45,20",
+            "aanslagregels": [
+                {
+                    "belastingplichtnummer": "00000000910124",
+                    "belastingJaar": "2021",
+                    "bezwaarMogelijk": true,
+                    "codeBelastingsoort": "4",
+                    "einddatum": "2022-12-30",
+                    "heffingsgrondslag": "196000,00",
+                    "ingangsdatum": "2022-12-30",
+                    "omschrijvingBelastingsoort": "Afvalstoffenheffing",
+                    "adres": [{
+                        "postcode": "1234AB",
+                        "woonplaatsnaam": "Demodam",
+                        "straatnaam": "Demostraat",
+                        "huisnummer": "7",
+                        "huisletter": "A",
+                        "huisnumertoevoeging": null,
+                        "locatieomschrijving": "Appartement"
+                    }]
+                }
+            ],
+            "beschikkingsregels": [
+                {
+                    "sleutelBeschikkingsregel": "2008-aap-000001765",
+                    "bezwaarMogelijk": true,
+                    "vastgesteldeWaarde": 10000,
+                    "wozObjectnummer": "123456789012",
+                    "adres": {
+                        "postcode": "1234AB",
+                        "woonplaatsnaam": "Demodam",
+                        "straatnaam": "Demostraat",
+                        "huisnummer": "7",
+                        "huisletter": "A",
+                        "huisnumertoevoeging": null,
+                        "locatieomschrijving": "Appartement"
+                    }
+                }
+            ],
+            "bijlagen": [
+                {
+                    "naamBestand": "situatie-foto-3",
+                    "typeBestand": "jpeg",
+                    "bestand": "RGF0IHdhcyB0aWpkdmVyc3BpasdfgasdfgLi4="
+                }
+            ]
+        }
+    ]
+}
