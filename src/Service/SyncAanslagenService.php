@@ -13,6 +13,10 @@ use Psr\Log\LoggerInterface;
 use CommonGateway\CoreBundle\Service\CallService;
 use App\Service\SynchronizationService;
 use Exception;
+use App\Entity\Gateway;
+use App\Entity\Entity;
+use DateTime;
+use DateInterval;
 
 class SyncAanslagenService
 {
@@ -88,12 +92,78 @@ class SyncAanslagenService
         $synchronization = $this->synchronizationService->findSyncBySource($source, $entity, $aanslag['aanslagbiljetnummer']);
         // $synchronization->setMapping($this->mapping); // not needed probably
         $synchronization = $this->synchronizationService->synchronize($synchronization, $aanslag);
+        $this->entityManager->persist($synchronization->getObject());
 
-        $this->logger->success("Synced aanslag: {$aanslag['aanslagbiljetnummer']}");
+        $this->logger->info("Synced aanslag: {$aanslag['aanslagbiljetnummer']}");
 
-        return $synchronization->getObject();
+        return $synchronization->getObject()->toArray();
 
     }//end syncAanslag()
+    
+    public function getAanslagen(string $bsn)
+    {
+
+        $source = $this->entityManager->getRepository('App:Gateway')->findOneBy(['reference' => 'https://openbelasting.nl/source/openbelasting.pinkapi.source.json']);
+        $entity = $this->entityManager->getRepository('App:Entity')->findOneBy(['reference' => 'https://openbelasting.nl/schemas/openblasting.aanslagbiljet.schema.json']);
+
+        if ($source === null || $entity === null) {
+            $this->logger->error("Source or entity not found");
+            return [];
+        }
+
+        $this->logger->debug("SyncAanslagenService -> syncAanslagenHandler()");
+        $this->logger->debug("Fetching aanslagen");
+
+        // Set token on source without persisting
+        // $source = $this->getOpenBelastingToken($source);
+
+        $endpoint = '/v1/aanslagen';
+        $dateTime = new DateTime('-4Y');
+        $dateTime->add(DateInterval::createFromDateString('-4 year'));
+        $fourYearsAgo = $dateTime->format('Y');
+        $query = ['bsn' => $bsn, 'belastingjaar-vanaf' => $fourYearsAgo];
+        try {
+            $fetchedAanslagen = $this->callService->getAllResults($source, $endpoint, ['query' => $query], 'result.instance.rows?');
+        } catch (Exception $e) {
+            $this->logger->error("Failed to fetch: {$e->getMessage()}");
+
+            return null;
+        }
+
+        $fetchedAanslagenCount = count($fetchedAanslagen);
+        $this->logger->debug("Fetched $fetchedAanslagenCount aanslagen");
+
+        $syncedAanslagen = [];
+        $syncedAanslagenCount = 0;
+        $flushCount      = 0;
+        foreach ($fetchedAanslagen as $fetchedAanslag) {
+            // dump('syn aanslag fetchedaanslagen');
+            if ($syncedAanslag = $this->syncAanslag($fetchedAanslag, $source, $entity)) {
+                $syncedAanslagenCount = ($syncedAanslagenCount + 1);
+                $flushCount            = ($flushCount + 1);
+                $syncedAanslagen[] = $syncedAanslag;
+                // dump('sync count '. (string) $syncedAanslagenCount);
+            }//end if
+
+            // Flush every 20.
+            if ($flushCount == 20) {
+                // dump('flush');
+                $this->entityManager->flush();
+                $flushCount = 0;
+            }//end if
+        }//end foreach
+
+        // Flush if we have some aanslagen left
+        if ($flushCount > 0) {
+            // dump('flush');
+            $this->entityManager->flush();
+            $flushCount = 0;
+        }//end if
+
+        $this->logger->debug("Synced $flushCount aanslagen from the $syncedAanslagenCount fetched aanslagen");
+
+        return $syncedAanslagen;
+    }
 
 
     /**
@@ -109,43 +179,7 @@ class SyncAanslagenService
         $this->data          = $data;
         $this->configuration = $configuration;
 
-        $source = $this->entityManager->getRepository('App:Gateway')->findOneBy(['reference' => 'https://openbelasting.nl/source/openbelasting.pinkapi.source.json']);
-        $entity = $this->entityManager->getRepository('App:Entity')->findOneBy(['reference' => 'https://openbelasting.nl/schemas/openblasting.bezwaaraanvraag.schema.json']);
-
-        if ($source === null || $entity === null) {
-            return [];
-        }
-
-        $this->logger->debug("SyncAanslagenService -> syncAanslagenHandler()");
-        $this->logger->debug("Fetching aanslagen");
-
-        try {
-            $fetchedAanslagen = $this->callService->getAllResults($source, '/v1/aanslagen', [], 'result.instance.rows?');
-        } catch (Exception $e) {
-            $this->logger->error("Failed to fetch: {$e->getMessage()}");
-
-            return null;
-        }
-
-        $fetchedAanslagenCount = count($fetchedAanslagen);
-        $this->logger->debug("Fetched $fetchedAanslagenCount aanslagen");
-
-        $syncedAanslagen = 0;
-        $flushCount      = 0;
-        foreach ($fetchedAanslagen as $fetchedAanslag) {
-            if ($this->syncAanslag($fetchedAanslag, $source, $entity)) {
-                $fetchedAanslagenCount = ($fetchedAanslagenCount + 1);
-                $flushCount            = ($flushCount + 1);
-            }//end if
-
-            // Flush every 20.
-            if ($flushCount == 20) {
-                $this->entityManager->flush();
-                $flushCount = 0;
-            }//end if
-        }//end foreach
-
-        $this->logger->debug("Synced $flushCount aanslagen from the $syncedAanslagen fetched aanslagen");
+        $this->getAanslagen('123412341');
 
         return ['response' => []];
 
