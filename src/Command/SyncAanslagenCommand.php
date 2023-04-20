@@ -19,7 +19,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 
-class SyncAanslagenCommando extends Command
+class SyncAanslagenCommand extends Command
 {
 
     /**
