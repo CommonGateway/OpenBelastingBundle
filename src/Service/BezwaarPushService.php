@@ -110,7 +110,7 @@ class BezwaarPushService
             $response = $this->callService->call($source, '/v1/bezwaren', 'POST', ['body' => $objectArray]);
             $result   = $this->callService->decodeResponse($source, $response);
             dump($result);
-            $bezwaarId   = $result['result']['reference'] ?? null;
+            $bezwaarId = $result['result']['reference'] ?? null;
         } catch (Exception $e) {
             $this->logger->error("Failed to POST bezwaar, message:  {$e->getMessage()}");
 
@@ -119,7 +119,7 @@ class BezwaarPushService
 
         return ['response' => $objectArray];
 
-    }//end openBelastingHandler()
+    }//end bezwaarPushHandler()
 
 
 }//end class
