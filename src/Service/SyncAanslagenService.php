@@ -216,9 +216,8 @@ class SyncAanslagenService
         $this->data          = $data;
         $this->configuration = $configuration;
 
-        $this->fetchAndSyncAanslagen('123412341');
 
-        return ['response' => []];
+        return ['response' => $this->fetchAndSyncAanslagen('123412341')];
 
     }//end syncAanslagenHandler()
 
