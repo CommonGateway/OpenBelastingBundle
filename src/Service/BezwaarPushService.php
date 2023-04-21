@@ -118,7 +118,7 @@ class BezwaarPushService
 
         return ['response' => $objectArray];
 
-    }//end openBelastingHandler()
+    }//end bezwaarPushHandler()
 
 
 }//end class
