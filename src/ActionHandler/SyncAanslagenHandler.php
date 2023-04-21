@@ -9,28 +9,28 @@
 namespace CommonGateway\OpenBelastingBundle\ActionHandler;
 
 use CommonGateway\CoreBundle\ActionHandler\ActionHandlerInterface;
-use CommonGateway\OpenBelastingBundle\Service\OpenBelastingService;
+use CommonGateway\OpenBelastingBundle\Service\SyncAanslagenService;
 
 
-class OpenBelastingHandler implements ActionHandlerInterface
+class SyncAanslagenHandler implements ActionHandlerInterface
 {
 
     /**
-     * The pet store service used by the handler
+     * The service used by the handler
      *
-     * @var OpenBelastingService
+     * @var SyncAanslagenService
      */
-    private OpenBelastingService $openBelastingService;
+    private SyncAanslagenService $syncAanslagenService;
 
 
     /**
      * The constructor
      *
-     * @param OpenBelastingService $OpenBelastingService The pet store service
+     * @param SyncAanslagenService $OpenBelastingService The pet store service
      */
-    public function __construct(OpenBelastingService $openBelastingService)
+    public function __construct(SyncAanslagenService $syncAanslagenService)
     {
-        $this->openBelastingService = $openBelastingService;
+        $this->syncAanslagenService = $syncAanslagenService;
 
     }//end __construct()
 
@@ -66,7 +66,7 @@ class OpenBelastingHandler implements ActionHandlerInterface
      */
     public function run(array $data, array $configuration): array
     {
-        return $this->openBelastingService->openBelastingHandler($data, $configuration);
+        return $this->syncAanslagenService->syncAanslagenHandler($data, $configuration);
 
     }//end run()
 
