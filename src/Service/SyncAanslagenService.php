@@ -100,6 +100,7 @@ class SyncAanslagenService
 
     }//end syncAanslag()
 
+
     /**
      * Synchronizes fetched aanslagen from openbelastingen api to a gateway aanslag.
      *
@@ -111,14 +112,14 @@ class SyncAanslagenService
      */
     private function syncAanslagen(array $fetchedAanslagen, Gateway $source, Entity $entity): array
     {
-        $syncedAanslagen = [];
+        $syncedAanslagen      = [];
         $syncedAanslagenCount = 0;
-        $flushCount      = 0;
+        $flushCount           = 0;
         foreach ($fetchedAanslagen as $fetchedAanslag) {
             if ($syncedAanslag = $this->syncAanslag($fetchedAanslag, $source, $entity)) {
                 $syncedAanslagenCount = ($syncedAanslagenCount + 1);
-                $flushCount            = ($flushCount + 1);
-                $syncedAanslagen[] = $syncedAanslag;
+                $flushCount           = ($flushCount + 1);
+                $syncedAanslagen[]    = $syncedAanslag;
             }//end if
 
             // Flush every 20.
@@ -140,6 +141,7 @@ class SyncAanslagenService
 
     }//end syncAanslagen()
 
+
     /**
      * Fetches aanslagen from openbelastingen api.
      *
@@ -154,7 +156,10 @@ class SyncAanslagenService
         $dateTime = new DateTime('-4Y');
         $dateTime->add(DateInterval::createFromDateString('-4 year'));
         $fourYearsAgo = $dateTime->format('Y');
-        $query = ['bsn' => $bsn, 'belastingjaar-vanaf' => $fourYearsAgo];
+        $query        = [
+            'bsn'                 => $bsn,
+            'belastingjaar-vanaf' => $fourYearsAgo,
+        ];
         try {
             $fetchedAanslagen = $this->callService->getAllResults($source, $endpoint, ['query' => $query], 'result.instance.rows?');
         } catch (Exception $e) {
@@ -166,14 +171,14 @@ class SyncAanslagenService
         $fetchedAanslagenCount = count($fetchedAanslagen);
         $this->logger->debug("Fetched $fetchedAanslagenCount aanslagen");
 
-
         return $fetchedAanslagen;
 
     }//end fetchAanslagen()
-    
+
+
     /**
      * Fetches aanslagbiljetten from the openbelastingen api with given bsn and synchronizes them in the gateway.
-     * 
+     *
      * @param string $bsn Dutch burgerservicenummer to fetch aanslagen for.
      *
      * @return array $syncedAanslagen
