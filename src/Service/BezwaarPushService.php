@@ -14,7 +14,7 @@ use CommonGateway\CoreBundle\Service\CallService;
 use App\Service\SynchronizationService;
 use Exception;
 
-class OpenBelastingService
+class BezwaarPushService
 {
 
     /**
@@ -79,7 +79,7 @@ class OpenBelastingService
      *
      * @return array A handler must ALWAYS return an array
      */
-    public function openBelastingHandler(array $data, array $configuration): array
+    public function bezwaarPushHandler(array $data, array $configuration): array
     {
         $this->data          = $data;
         $this->configuration = $configuration;

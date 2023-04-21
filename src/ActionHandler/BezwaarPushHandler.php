@@ -9,7 +9,7 @@
 namespace CommonGateway\OpenBelastingBundle\ActionHandler;
 
 use CommonGateway\CoreBundle\ActionHandler\ActionHandlerInterface;
-use CommonGateway\OpenBelastingBundle\Service\OpenBelastingService;
+use CommonGateway\OpenBelastingBundle\Service\BezwaarPushService;
 
 
 class OpenBelastingHandler implements ActionHandlerInterface
@@ -18,19 +18,19 @@ class OpenBelastingHandler implements ActionHandlerInterface
     /**
      * The pet store service used by the handler
      *
-     * @var OpenBelastingService
+     * @var BezwaarPushService
      */
-    private OpenBelastingService $openBelastingService;
+    private BezwaarPushService $bezwaarPushService;
 
 
     /**
      * The constructor
      *
-     * @param OpenBelastingService $OpenBelastingService The pet store service
+     * @param BezwaarPushService $OpenBelastingService The pet store service
      */
-    public function __construct(OpenBelastingService $openBelastingService)
+    public function __construct(BezwaarPushService $bezwaarPushService)
     {
-        $this->openBelastingService = $openBelastingService;
+        $this->bezwaarPushService = $bezwaarPushService;
 
     }//end __construct()
 
@@ -66,7 +66,7 @@ class OpenBelastingHandler implements ActionHandlerInterface
      */
     public function run(array $data, array $configuration): array
     {
-        return $this->openBelastingService->openBelastingHandler($data, $configuration);
+        return $this->bezwaarPushService->bezwaarPushHandler($data, $configuration);
 
     }//end run()
 
