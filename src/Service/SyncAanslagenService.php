@@ -86,7 +86,7 @@ class SyncAanslagenService
      *
      * @return void|null
      */
-    public function syncAanslag(array $aanslag, Gateway $source, Entity $entity)
+    private function syncAanslag(array $aanslag, Gateway $source, Entity $entity)
     {
         // Get or create sync and map object.
         $synchronization = $this->synchronizationService->findSyncBySource($source, $entity, $aanslag['aanslagbiljetnummer']);
@@ -99,8 +99,86 @@ class SyncAanslagenService
         return $synchronization->getObject()->toArray();
 
     }//end syncAanslag()
+
+    /**
+     * Synchronizes fetched aanslagen from openbelastingen api to a gateway aanslag.
+     *
+     * @param array   $fetchedAanslagen Fetched aanslagen from openbelastingen api.
+     * @param Gateway $source           OpenBelasting API.
+     * @param Entity  $entity           Aanslagbiljet entity.
+     *
+     * @return array $syncedAanslagen
+     */
+    private function syncAanslagen(array $fetchedAanslagen, Gateway $source, Entity $entity): array
+    {
+        $syncedAanslagen = [];
+        $syncedAanslagenCount = 0;
+        $flushCount      = 0;
+        foreach ($fetchedAanslagen as $fetchedAanslag) {
+            if ($syncedAanslag = $this->syncAanslag($fetchedAanslag, $source, $entity)) {
+                $syncedAanslagenCount = ($syncedAanslagenCount + 1);
+                $flushCount            = ($flushCount + 1);
+                $syncedAanslagen[] = $syncedAanslag;
+            }//end if
+
+            // Flush every 20.
+            if ($flushCount == 20) {
+                $this->entityManager->flush();
+                $flushCount = 0;
+            }//end if
+        }//end foreach
+
+        // Flush if we have some aanslagen left
+        if ($flushCount > 0) {
+            $this->entityManager->flush();
+            $flushCount = 0;
+        }//end if
+
+        $this->logger->debug("Synced $flushCount aanslagen from the $syncedAanslagenCount fetched aanslagen");
+
+        return $syncedAanslagen;
+
+    }//end syncAanslagen()
+
+    /**
+     * Fetches aanslagen from openbelastingen api.
+     *
+     * @param Gateway $source OpenBelasting API.
+     * @param string  $bsn    Dutch burgerservicenummer to fetch aanslagen for.
+     *
+     * @return array $fetchedAanslagen
+     */
+    private function fetchAanslagen(Gateway $source, string $bsn): array
+    {
+        $endpoint = '/v1/aanslagen';
+        $dateTime = new DateTime('-4Y');
+        $dateTime->add(DateInterval::createFromDateString('-4 year'));
+        $fourYearsAgo = $dateTime->format('Y');
+        $query = ['bsn' => $bsn, 'belastingjaar-vanaf' => $fourYearsAgo];
+        try {
+            $fetchedAanslagen = $this->callService->getAllResults($source, $endpoint, ['query' => $query], 'result.instance.rows?');
+        } catch (Exception $e) {
+            $this->logger->error("Failed to fetch: {$e->getMessage()}");
+
+            return [];
+        }
+
+        $fetchedAanslagenCount = count($fetchedAanslagen);
+        $this->logger->debug("Fetched $fetchedAanslagenCount aanslagen");
+
+
+        return $fetchedAanslagen;
+
+    }//end fetchAanslagen()
     
-    public function getAanslagen(string $bsn)
+    /**
+     * Fetches aanslagbiljetten from the openbelastingen api with given bsn and synchronizes them in the gateway.
+     * 
+     * @param string $bsn Dutch burgerservicenummer to fetch aanslagen for.
+     *
+     * @return array $syncedAanslagen
+     **/
+    public function fetchAndSyncAanslagen(string $bsn): array
     {
 
         $source = $this->entityManager->getRepository('App:Gateway')->findOneBy(['reference' => 'https://openbelasting.nl/source/openbelasting.pinkapi.source.json']);
@@ -112,58 +190,12 @@ class SyncAanslagenService
         }
 
         $this->logger->debug("SyncAanslagenService -> syncAanslagenHandler()");
-        $this->logger->debug("Fetching aanslagen");
 
-        // Set token on source without persisting
-        // $source = $this->getOpenBelastingToken($source);
+        $fetchedAanslagen = $this->fetchAanslagen($source, $bsn);
 
-        $endpoint = '/v1/aanslagen';
-        $dateTime = new DateTime('-4Y');
-        $dateTime->add(DateInterval::createFromDateString('-4 year'));
-        $fourYearsAgo = $dateTime->format('Y');
-        $query = ['bsn' => $bsn, 'belastingjaar-vanaf' => $fourYearsAgo];
-        try {
-            $fetchedAanslagen = $this->callService->getAllResults($source, $endpoint, ['query' => $query], 'result.instance.rows?');
-        } catch (Exception $e) {
-            $this->logger->error("Failed to fetch: {$e->getMessage()}");
+        return $this->syncAanslagen($fetchedAanslagen, $source, $entity);
 
-            return null;
-        }
-
-        $fetchedAanslagenCount = count($fetchedAanslagen);
-        $this->logger->debug("Fetched $fetchedAanslagenCount aanslagen");
-
-        $syncedAanslagen = [];
-        $syncedAanslagenCount = 0;
-        $flushCount      = 0;
-        foreach ($fetchedAanslagen as $fetchedAanslag) {
-            // dump('syn aanslag fetchedaanslagen');
-            if ($syncedAanslag = $this->syncAanslag($fetchedAanslag, $source, $entity)) {
-                $syncedAanslagenCount = ($syncedAanslagenCount + 1);
-                $flushCount            = ($flushCount + 1);
-                $syncedAanslagen[] = $syncedAanslag;
-                // dump('sync count '. (string) $syncedAanslagenCount);
-            }//end if
-
-            // Flush every 20.
-            if ($flushCount == 20) {
-                // dump('flush');
-                $this->entityManager->flush();
-                $flushCount = 0;
-            }//end if
-        }//end foreach
-
-        // Flush if we have some aanslagen left
-        if ($flushCount > 0) {
-            // dump('flush');
-            $this->entityManager->flush();
-            $flushCount = 0;
-        }//end if
-
-        $this->logger->debug("Synced $flushCount aanslagen from the $syncedAanslagenCount fetched aanslagen");
-
-        return $syncedAanslagen;
-    }
+    }//end fetchAndSyncAanslagen()
 
 
     /**
@@ -179,7 +211,7 @@ class SyncAanslagenService
         $this->data          = $data;
         $this->configuration = $configuration;
 
-        $this->getAanslagen('123412341');
+        $this->fetchAndSyncAanslagen('123412341');
 
         return ['response' => []];
 
