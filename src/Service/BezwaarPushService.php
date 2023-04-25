@@ -84,6 +84,8 @@ class BezwaarPushService
         $this->data          = $data;
         $this->configuration = $configuration;
 
+        $data = $data['response'];
+
         $source = $this->entityManager->getRepository('App:Gateway')->findOneBy(['reference' => 'https://openbelasting.nl/source/openbelasting.pinkapi.source.json']);
         $entity = $this->entityManager->getRepository('App:Entity')->findOneBy(['reference' => 'https://openbelasting.nl/schemas/openblasting.bezwaaraanvraag.schema.json']);
 
@@ -93,29 +95,72 @@ class BezwaarPushService
 
         $this->logger->debug("OpenBelastingService -> OpenBelastingHandler()");
 
-        $dataId = $data['object']['_self']['id'];
+        $dataId = $data['_self']['id'];
 
         $object      = $this->entityManager->find('App:ObjectEntity', $dataId);
         $objectArray = $object->toArray();
 
-        $synchronization = $this->synchronizationService->findSyncBySource($source, $entity, $object->getId()->toString());
+        $synchronization = $this->synchronizationService->findSyncBySource($source, $entity, $objectArray['aanslagbiljetnummer'] . $objectArray['aanslagbiljetvolgnummer']);
+
+        // If we already have a sync with a object for given aanslagbiljet return error (cant create 2 bezwaren for one aanslagbiljet).
+        // if ($synchronization->getObject() !== null) {
+        //     return [];
+        // }
+
         $this->synchronizationService->synchronize($synchronization, $objectArray);
 
-        // @todo maybe unset
+        // Unset all gateway specific stuff.
         unset($objectArray['id']);
         unset($objectArray['_self']);
+        if (isset($objectArray['bijlagen']) === true)  {
+            foreach ($objectArray['bijlagen'] as $key => $bijlage) {
+                unset($objectArray['bijlagen'][$key]['_self']);
+            }
+        }
+        if (isset($objectArray['beschikkingsregels']) === true)  {
+            foreach ($objectArray['beschikkingsregels'] as $key => $beschikkingsregel) {
+                unset($objectArray['beschikkingsregels'][0]['_self']);
+                if (isset($objectArray['beschikkingsregels'][$key]['grieven'][0])) {
+                    foreach ($objectArray['beschikkingsregels'][$key]['grieven'] as $key2 => $grief) {
+                        unset($objectArray['beschikkingsregels'][$key]['grieven'][$key2]['_self']);
+                    }
+                }
+            }
+        }
+        if (isset($objectArray['belastingplichtige']) === true)  {
+            unset($objectArray['belastingplichtige']['_self']);
+        }
+        if (isset($objectArray['aanslagregels']) === true)  {
+            foreach ($objectArray['aanslagregels'] as $key => $aanslagregel) {
+                unset($objectArray['aanslagregels'][$key]['_self']);
+                if (isset($objectArray['aanslagregels'][$key]['grieven'][0])) {
+                    foreach ($objectArray['aanslagregels'][$key]['grieven'] as $key2 => $grief) {
+                        unset($objectArray['aanslagregels'][$key]['grieven'][$key2]['_self']);
+                    }
+                }
+            }
+        }
 
-        // Send the POST/PUT request to pink.
+        // Flush
+        $this->entityManager->persist($synchronization);
+        $this->entityManager->flush();
+
+        var_dump(json_encode($objectArray));die;
+
+        // Send the POST request to pink.
         try {
-            $response = $this->callService->call($source, '/v1/bezwaren', 'POST', ['body' => $objectArray]);
+            $response = $this->callService->call($source, '/v1/bezwaren', 'POST', ['form_params' => $objectArray]);
             $result   = $this->callService->decodeResponse($source, $response);
-            dump($result);
-            $bezwaarId = $result['result']['reference'] ?? null;
         } catch (Exception $e) {
             $this->logger->error("Failed to POST bezwaar, message:  {$e->getMessage()}");
+            var_dump($e->getMessage());
 
             return false;
         }//end try
+
+        // Flush
+        $this->entityManager->persist($synchronization);
+        $this->entityManager->flush();
 
         return ['response' => $objectArray];
 

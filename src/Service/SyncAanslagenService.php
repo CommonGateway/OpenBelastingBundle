@@ -164,11 +164,13 @@ class SyncAanslagenService
             $fetchedAanslagen = $this->callService->getAllResults($source, $endpoint, ['query' => $query], 'result.instance.rows?');
         } catch (Exception $e) {
             $this->logger->error("Failed to fetch: {$e->getMessage()}");
+            var_dump($e->getMessage());
 
             return [];
         }
 
         $fetchedAanslagenCount = count($fetchedAanslagen);
+        var_dump($fetchedAanslagenCount);
         $this->logger->debug("Fetched $fetchedAanslagenCount aanslagen");
 
         return $fetchedAanslagen;

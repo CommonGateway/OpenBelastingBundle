@@ -12,7 +12,7 @@ use CommonGateway\CoreBundle\ActionHandler\ActionHandlerInterface;
 use CommonGateway\OpenBelastingBundle\Service\BezwaarPushService;
 
 
-class OpenBelastingHandler implements ActionHandlerInterface
+class BezwaarPushHandler implements ActionHandlerInterface
 {
 
     /**
