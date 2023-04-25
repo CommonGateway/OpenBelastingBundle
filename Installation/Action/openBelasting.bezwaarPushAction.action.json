@@ -2,9 +2,9 @@
   "title": "BezwaarPushAction",
   "$id": "https://openbelasting.nl/action/openbelasting.BezwaarPushAction.action.json",
   "$schema": "https://docs.commongateway.nl/schemas/Action.schema.json",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "listens": [
-    "commongatway.object.created"
+    "commongateway.object.created"
   ],
   "throws": [],
   "conditions": {
