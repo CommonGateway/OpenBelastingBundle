@@ -100,24 +100,24 @@ class BezwaarPushService
         $object      = $this->entityManager->find('App:ObjectEntity', $dataId);
         $objectArray = $object->toArray();
 
-        $synchronization = $this->synchronizationService->findSyncBySource($source, $entity, $objectArray['aanslagbiljetnummer'] . $objectArray['aanslagbiljetvolgnummer']);
+        $synchronization = $this->synchronizationService->findSyncBySource($source, $entity, $objectArray['aanslagbiljetnummer'].$objectArray['aanslagbiljetvolgnummer']);
 
         // If we already have a sync with a object for given aanslagbiljet return error (cant create 2 bezwaren for one aanslagbiljet).
         // if ($synchronization->getObject() !== null) {
-        //     return [];
+        // return [];
         // }
-
         $this->synchronizationService->synchronize($synchronization, $objectArray);
 
         // Unset all gateway specific stuff.
         unset($objectArray['id']);
         unset($objectArray['_self']);
-        if (isset($objectArray['bijlagen']) === true)  {
+        if (isset($objectArray['bijlagen']) === true) {
             foreach ($objectArray['bijlagen'] as $key => $bijlage) {
                 unset($objectArray['bijlagen'][$key]['_self']);
             }
         }
-        if (isset($objectArray['beschikkingsregels']) === true)  {
+
+        if (isset($objectArray['beschikkingsregels']) === true) {
             foreach ($objectArray['beschikkingsregels'] as $key => $beschikkingsregel) {
                 unset($objectArray['beschikkingsregels'][0]['_self']);
                 if (isset($objectArray['beschikkingsregels'][$key]['grieven'][0])) {
@@ -127,10 +127,12 @@ class BezwaarPushService
                 }
             }
         }
-        if (isset($objectArray['belastingplichtige']) === true)  {
+
+        if (isset($objectArray['belastingplichtige']) === true) {
             unset($objectArray['belastingplichtige']['_self']);
         }
-        if (isset($objectArray['aanslagregels']) === true)  {
+
+        if (isset($objectArray['aanslagregels']) === true) {
             foreach ($objectArray['aanslagregels'] as $key => $aanslagregel) {
                 unset($objectArray['aanslagregels'][$key]['_self']);
                 if (isset($objectArray['aanslagregels'][$key]['grieven'][0])) {
@@ -145,7 +147,8 @@ class BezwaarPushService
         $this->entityManager->persist($synchronization);
         $this->entityManager->flush();
 
-        var_dump(json_encode($objectArray));die;
+        var_dump(json_encode($objectArray));
+        die;
 
         // Send the POST request to pink.
         try {
