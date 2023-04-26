@@ -1,7 +1,7 @@
 {
   "$id": "https://openbelasting.nl/schemas/openblasting.bezwaaraanvraag.schema.json",
   "$schema": "https://docs.commongateway.nl/schemas/Entity.schema.json",
-  "version": "0.1",
+  "version": "0.2",
   "title": "BezwaarAanvraag",
   "description": "Bevat de informatie die nodig is om een bezwaar aanvraag in te dienen",
   "type": "object",
@@ -53,14 +53,14 @@
       "type": "array",
       "description": "Lijst van aanslagregels waartegen bezwaar gemaakt wordt, inclusief de grieven.",
       "items": {
-        "$ref": "https://openbelasting.nl/schemas/openblasting.aanslagregel.schema.json"
+        "$ref": "https://openbelasting.nl/schemas/openblasting.aanslagregelgrieven.schema.json"
       }
     },
     "beschikkingsregels": {
       "type": "array",
       "description": "Lijst van beschikkingsregels waartegen bezwaar gemaakt wordt, inclusief de grieven.",
       "items": {
-        "$ref": "https://openbelasting.nl/schemas/openblasting.beschikkingsregel.schema.json"
+        "$ref": "https://openbelasting.nl/schemas/openblasting.beschikkingsregelgrieven.schema.json"
       }
     },
     "bijlagen": {
