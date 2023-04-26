@@ -12,6 +12,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use CommonGateway\CoreBundle\Service\CallService;
 use App\Service\SynchronizationService;
+use App\Entity\Gateway;
+use App\Entity\Synchronization;
+use CommonGateway\CoreBundle\Service\MappingService;
 use Exception;
 
 class BezwaarPushService
@@ -38,6 +41,11 @@ class BezwaarPushService
     private SynchronizationService $synchronizationService;
 
     /**
+     * @var MappingService
+     */
+    private MappingService $mappingService;
+
+    /**
      * @var CallService
      */
     private CallService $callService;
@@ -59,16 +67,43 @@ class BezwaarPushService
         EntityManagerInterface $entityManager,
         LoggerInterface $pluginLogger,
         SynchronizationService $synchronizationService,
+        MappingService $mappingService,
         CallService $callService
     ) {
         $this->entityManager          = $entityManager;
         $this->logger                 = $pluginLogger;
         $this->synchronizationService = $synchronizationService;
+        $this->mappingService            = $mappingService;
         $this->callService            = $callService;
         $this->configuration          = [];
         $this->data                   = [];
 
     }//end __construct()
+
+    /**
+     * Sends bezwaar to open belastingen api
+     * 
+     * @param Gateway $source
+     * @param array $bezwaar
+     * 
+     * @return array if went wrong
+     */
+    private function sendBezwaar(Gateway $source, array $bezwaar, Synchronization $synchronization): ?array
+    {
+        // Send the POST request to pink.
+        try {
+            $response = $this->callService->call($source, '/v1/bezwaren', 'POST', ['form_params' => $bezwaar, 'headers' => ['Content-Type' => 'application/json']]);
+            $result   = $this->callService->decodeResponse($source, $response);
+        } catch (Exception $e) {
+            $this->logger->error("Failed to POST bezwaar, message:  {$e->getMessage()}");
+
+            return ['response' => []];
+        }//end try
+
+        // Flush
+        $this->entityManager->persist($synchronization);
+        $this->entityManager->flush();
+    }
 
 
     /**
@@ -88,6 +123,7 @@ class BezwaarPushService
 
         $source = $this->entityManager->getRepository('App:Gateway')->findOneBy(['reference' => 'https://openbelasting.nl/source/openbelasting.pinkapi.source.json']);
         $entity = $this->entityManager->getRepository('App:Entity')->findOneBy(['reference' => 'https://openbelasting.nl/schemas/openblasting.bezwaaraanvraag.schema.json']);
+        $mapping = $this->entityManager->getRepository('App:Mapping')->findOneBy(['reference' => 'https://dowr.openbelasting.nl/mapping/openbelasting.bezwaar.push.mapping.json']);
 
         if ($source === null || $entity === null) {
             return [];
@@ -109,54 +145,9 @@ class BezwaarPushService
 
         $this->synchronizationService->synchronize($synchronization, $objectArray);
 
-        // Unset all gateway specific stuff.
-        unset($objectArray['id']);
-        unset($objectArray['_self']);
-        if (isset($objectArray['bijlagen']) === true) {
-            foreach ($objectArray['bijlagen'] as $key => $bijlage) {
-                unset($objectArray['bijlagen'][$key]['_self']);
-            }
-        }
+        $objectArray = $this->mappingService->mapping($mapping, $objectArray);
 
-        if (isset($objectArray['beschikkingsregels']) === true) {
-            foreach ($objectArray['beschikkingsregels'] as $key => $beschikkingsregel) {
-                unset($objectArray['beschikkingsregels'][0]['_self']);
-                if (isset($objectArray['beschikkingsregels'][$key]['grieven'][0])) {
-                    foreach ($objectArray['beschikkingsregels'][$key]['grieven'] as $key2 => $grief) {
-                        unset($objectArray['beschikkingsregels'][$key]['grieven'][$key2]['_self']);
-                    }
-                }
-            }
-        }
-
-        if (isset($objectArray['belastingplichtige']) === true) {
-            unset($objectArray['belastingplichtige']['_self']);
-        }
-
-        if (isset($objectArray['aanslagregels']) === true) {
-            foreach ($objectArray['aanslagregels'] as $key => $aanslagregel) {
-                unset($objectArray['aanslagregels'][$key]['_self']);
-                if (isset($objectArray['aanslagregels'][$key]['grieven'][0])) {
-                    foreach ($objectArray['aanslagregels'][$key]['grieven'] as $key2 => $grief) {
-                        unset($objectArray['aanslagregels'][$key]['grieven'][$key2]['_self']);
-                    }
-                }
-            }
-        }
-
-        // Send the POST request to pink.
-        try {
-            $response = $this->callService->call($source, '/v1/bezwaren', 'POST', ['form_params' => $objectArray, 'headers' => ['Content-Type' => 'application/json']]);
-            $result   = $this->callService->decodeResponse($source, $response);
-        } catch (Exception $e) {
-            $this->logger->error("Failed to POST bezwaar, message:  {$e->getMessage()}");
-
-            return ['response' => []];
-        }//end try
-
-        // Flush
-        $this->entityManager->persist($synchronization);
-        $this->entityManager->flush();
+        $this->sendBezwaar($source, $objectArray, $synchronization);
 
         return ['response' => $objectArray];
 
