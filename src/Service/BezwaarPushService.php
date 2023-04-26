@@ -103,9 +103,9 @@ class BezwaarPushService
         $synchronization = $this->synchronizationService->findSyncBySource($source, $entity, $objectArray['aanslagbiljetnummer'] . $objectArray['aanslagbiljetvolgnummer']);
 
         // If we already have a sync with a object for given aanslagbiljet return error (cant create 2 bezwaren for one aanslagbiljet).
-        // if ($synchronization->getObject() !== null) {
-        //     return [];
-        // }
+        if ($synchronization->getObject() !== null) {
+            return [];
+        }
 
         $this->synchronizationService->synchronize($synchronization, $objectArray);
 
@@ -141,21 +141,14 @@ class BezwaarPushService
             }
         }
 
-        // Flush
-        $this->entityManager->persist($synchronization);
-        $this->entityManager->flush();
-
-        var_dump(json_encode($objectArray));die;
-
         // Send the POST request to pink.
         try {
-            $response = $this->callService->call($source, '/v1/bezwaren', 'POST', ['form_params' => $objectArray]);
+            $response = $this->callService->call($source, '/v1/bezwaren', 'POST', ['form_params' => $objectArray, 'headers' => ['Content-Type' => 'application/json']]);
             $result   = $this->callService->decodeResponse($source, $response);
         } catch (Exception $e) {
             $this->logger->error("Failed to POST bezwaar, message:  {$e->getMessage()}");
-            var_dump($e->getMessage());
 
-            return false;
+            return ['response' => []];
         }//end try
 
         // Flush
