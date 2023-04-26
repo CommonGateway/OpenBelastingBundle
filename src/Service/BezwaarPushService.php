@@ -73,19 +73,20 @@ class BezwaarPushService
         $this->entityManager          = $entityManager;
         $this->logger                 = $pluginLogger;
         $this->synchronizationService = $synchronizationService;
-        $this->mappingService            = $mappingService;
+        $this->mappingService         = $mappingService;
         $this->callService            = $callService;
         $this->configuration          = [];
         $this->data                   = [];
 
     }//end __construct()
 
+
     /**
      * Sends bezwaar to open belastingen api
-     * 
+     *
      * @param Gateway $source
-     * @param array $bezwaar
-     * 
+     * @param array   $bezwaar
+     *
      * @return array if went wrong
      */
     private function sendBezwaar(Gateway $source, array $bezwaar, Synchronization $synchronization): ?array
@@ -103,7 +104,8 @@ class BezwaarPushService
         // Flush
         $this->entityManager->persist($synchronization);
         $this->entityManager->flush();
-    }
+
+    }//end sendBezwaar()
 
 
     /**
@@ -121,8 +123,8 @@ class BezwaarPushService
 
         $data = $data['response'];
 
-        $source = $this->entityManager->getRepository('App:Gateway')->findOneBy(['reference' => 'https://openbelasting.nl/source/openbelasting.pinkapi.source.json']);
-        $entity = $this->entityManager->getRepository('App:Entity')->findOneBy(['reference' => 'https://openbelasting.nl/schemas/openblasting.bezwaaraanvraag.schema.json']);
+        $source  = $this->entityManager->getRepository('App:Gateway')->findOneBy(['reference' => 'https://openbelasting.nl/source/openbelasting.pinkapi.source.json']);
+        $entity  = $this->entityManager->getRepository('App:Entity')->findOneBy(['reference' => 'https://openbelasting.nl/schemas/openblasting.bezwaaraanvraag.schema.json']);
         $mapping = $this->entityManager->getRepository('App:Mapping')->findOneBy(['reference' => 'https://dowr.openbelasting.nl/mapping/openbelasting.bezwaar.push.mapping.json']);
 
         if ($source === null || $entity === null) {
