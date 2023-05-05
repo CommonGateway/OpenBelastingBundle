@@ -88,13 +88,14 @@ class SyncAanslagenService
      */
     private function syncAanslag(array $aanslag, Gateway $source, Entity $entity)
     {
+        $sourceId = $aanslag['aanslagbiljetnummer'].'-'.$aanslag['aanslagbiljetvolgnummer'];
         // Get or create sync and map object.
-        $synchronization = $this->synchronizationService->findSyncBySource($source, $entity, $aanslag['aanslagbiljetnummer']);
+        $synchronization = $this->synchronizationService->findSyncBySource($source, $entity, $sourceId);
         // $synchronization->setMapping($this->mapping); // not needed probably
         $synchronization = $this->synchronizationService->synchronize($synchronization, $aanslag);
         $this->entityManager->persist($synchronization->getObject());
 
-        $this->logger->info("Synced aanslag: {$aanslag['aanslagbiljetnummer']}");
+        $this->logger->info("Synced aanslag: $sourceId");
 
         return $synchronization->getObject()->toArray();
 
