@@ -138,7 +138,7 @@ class BezwaarPushService
         $object      = $this->entityManager->find('App:ObjectEntity', $dataId);
         $objectArray = $object->toArray();
 
-        $synchronization = $this->synchronizationService->findSyncBySource($source, $entity, $objectArray['aanslagbiljetnummer'].$objectArray['aanslagbiljetvolgnummer']);
+        $synchronization = $this->synchronizationService->findSyncBySource($source, $entity, $objectArray['aanslagbiljetnummer'].'-'.$objectArray['aanslagbiljetvolgnummer']);
 
         // If we already have a sync with a object for given aanslagbiljet return error (cant create 2 bezwaren for one aanslagbiljet).
         if ($synchronization->getObject() !== null) {
