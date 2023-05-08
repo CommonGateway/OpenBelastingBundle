@@ -92,7 +92,7 @@ class SyncAanslagenService
         // Get or create sync and map object.
         $synchronization = $this->synchronizationService->findSyncBySource($source, $entity, $sourceId);
         // $synchronization->setMapping($this->mapping); // not needed probably
-        $synchronization = $this->synchronizationService->synchronize($synchronization, $aanslag);
+        $synchronization = $this->synchronizationService->synchronize($synchronization, $aanslag, true);
         $this->entityManager->persist($synchronization->getObject());
 
         $this->logger->info("Synced aanslag: $sourceId");
