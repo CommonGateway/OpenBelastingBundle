@@ -124,7 +124,7 @@ class SyncAanslagenService
             }//end if
 
             // Flush every 20.
-            if ($flushCount == 20) {
+            if ($flushCount == 1) {
                 $this->entityManager->flush();
                 $flushCount = 0;
             }//end if
