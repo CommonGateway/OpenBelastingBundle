@@ -2,7 +2,7 @@
 /**
  * An example handler for the per store.
  *
- * @author  Conduction.nl <info@conduction.nl>
+ * @author  Barry Brands <barry@conduction.nl>, Conduction.nl <info@conduction.nl>
  * @license EUPL-1.2 https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
  */
 

@@ -2,7 +2,7 @@
 /**
  * This services synchronizes aanslagen from a OpenBelastingen API.
  *
- * @author  Conduction.nl <info@conduction.nl>
+ * @author  Barry Brands <barry@conduction.nl>, Wilco Louwerse <wilco@conduction.nl>, Conduction.nl <info@conduction.nl>
  * @license EUPL-1.2 https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
  */
 
