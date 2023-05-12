@@ -138,7 +138,7 @@ class BezwaarPushService
         $dataId = $data['_self']['id'];
 
         $object      = $this->entityManager->find('App:ObjectEntity', $dataId);
-        $objectArray = $object->toArray(['noMetadata' => true]);
+        $objectArray = $object->toArray(['metadata' => false]);
 
         $synchronization = $this->synchronizationService->findSyncBySource($source, $entity, $objectArray['aanslagbiljetnummer'].'-'.$objectArray['aanslagbiljetvolgnummer']);
 
