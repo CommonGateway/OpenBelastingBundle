@@ -79,13 +79,13 @@ class BezwaarPushService
         $this->data                   = [];
 
     }//end __construct()
-    
-    
+
+
     /**
      * Sends bezwaar to open belastingen api
      *
-     * @param Gateway $source
-     * @param array $bezwaar
+     * @param Gateway         $source
+     * @param array           $bezwaar
      * @param Synchronization $synchronization
      *
      * @return array if went wrong
@@ -105,7 +105,7 @@ class BezwaarPushService
         // Flush
         $this->entityManager->persist($synchronization);
         $this->entityManager->flush();
-        
+
         return ['response' => $result];
 
     }//end sendBezwaar()
@@ -126,8 +126,8 @@ class BezwaarPushService
 
         $data = $data['response'];
 
-        $source  = $this->entityManager->getRepository('App:Gateway')->findOneBy(['reference' => 'https://openbelasting.nl/source/openbelasting.pinkapi.source.json']);
-        $entity  = $this->entityManager->getRepository('App:Entity')->findOneBy(['reference' => 'https://openbelasting.nl/schemas/openblasting.bezwaaraanvraag.schema.json']);
+        $source = $this->entityManager->getRepository('App:Gateway')->findOneBy(['reference' => 'https://openbelasting.nl/source/openbelasting.pinkapi.source.json']);
+        $entity = $this->entityManager->getRepository('App:Entity')->findOneBy(['reference' => 'https://openbelasting.nl/schemas/openblasting.bezwaaraanvraag.schema.json']);
 
         if ($source === null || $entity === null) {
             return [];
