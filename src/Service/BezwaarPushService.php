@@ -106,7 +106,7 @@ class BezwaarPushService
         $this->entityManager->persist($synchronization);
         $this->entityManager->flush();
 
-        return ['response' => $result];
+        return ['response' => $result, 'bezwaar' => $bezwaar];
 
     }//end sendBezwaar()
 
@@ -149,9 +149,7 @@ class BezwaarPushService
 
         $this->synchronizationService->synchronize($synchronization, $objectArray);
 
-        $this->sendBezwaar($source, $objectArray, $synchronization);
-
-        return ['response' => $objectArray];
+        return $this->sendBezwaar($source, $objectArray, $synchronization);
 
     }//end bezwaarPushHandler()
 
