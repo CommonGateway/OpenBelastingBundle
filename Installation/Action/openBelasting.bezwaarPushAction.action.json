@@ -4,7 +4,7 @@
   "$schema": "https://docs.commongateway.nl/schemas/Action.schema.json",
   "version": "0.0.2",
   "listens": [
-    "commongateway.object.created"
+    "commongateway.object.create"
   ],
   "throws": [],
   "conditions": {
