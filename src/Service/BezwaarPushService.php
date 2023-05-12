@@ -106,7 +106,10 @@ class BezwaarPushService
         $this->entityManager->persist($synchronization);
         $this->entityManager->flush();
 
-        return ['response' => $result, 'bezwaar' => $bezwaar];
+        return [
+            'response' => $result,
+            'bezwaar'  => $bezwaar,
+        ];
 
     }//end sendBezwaar()
 
