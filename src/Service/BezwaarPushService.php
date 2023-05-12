@@ -82,7 +82,7 @@ class BezwaarPushService
 
 
     /**
-     * Sends bezwaar to open belastingen api
+     * Sends bezwaar to open belastingen api.
      *
      * @param Gateway         $source
      * @param array           $bezwaar
