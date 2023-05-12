@@ -2,7 +2,7 @@
 /**
  * An example service for adding business logic to your class.
  *
- * @author  Barry Brands <barry@conduction.nl>, Conduction.nl <info@conduction.nl>
+ * @author  Barry Brands <barry@conduction.nl>, Wilco Louwerse <wilco@conduction.nl>, Conduction.nl <info@conduction.nl>
  * @license EUPL-1.2 https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12
  */
 
@@ -84,8 +84,9 @@ class BezwaarPushService
     /**
      * Sends bezwaar to open belastingen api
      *
-     * @param Gateway $source
-     * @param array   $bezwaar
+     * @param Gateway         $source
+     * @param array           $bezwaar
+     * @param Synchronization $synchronization
      *
      * @return array if went wrong
      */
@@ -93,17 +94,19 @@ class BezwaarPushService
     {
         // Send the POST request to pink.
         try {
-            $response = $this->callService->call($source, '/v1/bezwaren', 'POST', ['form_params' => $bezwaar, 'headers' => ['Content-Type' => 'application/json']]);
+            $response = $this->callService->call($source, '/v1/bezwaren', 'POST', ['body' => \Safe\json_encode($bezwaar), 'headers' => ['Content-Type' => 'application/json']]);
             $result   = $this->callService->decodeResponse($source, $response);
         } catch (Exception $e) {
             $this->logger->error("Failed to POST bezwaar, message:  {$e->getMessage()}");
 
-            return ['response' => []];
+            return ['response' => ['Error' => $e->getMessage()]];
         }//end try
 
         // Flush
         $this->entityManager->persist($synchronization);
         $this->entityManager->flush();
+
+        return ['response' => $result];
 
     }//end sendBezwaar()
 
@@ -123,9 +126,8 @@ class BezwaarPushService
 
         $data = $data['response'];
 
-        $source  = $this->entityManager->getRepository('App:Gateway')->findOneBy(['reference' => 'https://openbelasting.nl/source/openbelasting.pinkapi.source.json']);
-        $entity  = $this->entityManager->getRepository('App:Entity')->findOneBy(['reference' => 'https://openbelasting.nl/schemas/openblasting.bezwaaraanvraag.schema.json']);
-        $mapping = $this->entityManager->getRepository('App:Mapping')->findOneBy(['reference' => 'https://dowr.openbelasting.nl/mapping/openbelasting.bezwaar.push.mapping.json']);
+        $source = $this->entityManager->getRepository('App:Gateway')->findOneBy(['reference' => 'https://openbelasting.nl/source/openbelasting.pinkapi.source.json']);
+        $entity = $this->entityManager->getRepository('App:Entity')->findOneBy(['reference' => 'https://openbelasting.nl/schemas/openblasting.bezwaaraanvraag.schema.json']);
 
         if ($source === null || $entity === null) {
             return [];
@@ -136,7 +138,7 @@ class BezwaarPushService
         $dataId = $data['_self']['id'];
 
         $object      = $this->entityManager->find('App:ObjectEntity', $dataId);
-        $objectArray = $object->toArray();
+        $objectArray = $object->toArray(['metadata' => false]);
 
         $synchronization = $this->synchronizationService->findSyncBySource($source, $entity, $objectArray['aanslagbiljetnummer'].'-'.$objectArray['aanslagbiljetvolgnummer']);
 
@@ -146,8 +148,6 @@ class BezwaarPushService
         }
 
         $this->synchronizationService->synchronize($synchronization, $objectArray);
-
-        $objectArray = $this->mappingService->mapping($mapping, $objectArray);
 
         $this->sendBezwaar($source, $objectArray, $synchronization);
 
