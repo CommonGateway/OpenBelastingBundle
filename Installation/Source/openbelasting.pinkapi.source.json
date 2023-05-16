@@ -8,5 +8,8 @@
     "location": "!ChangeMe!",
     "username": "!ChangeMe!",
     "password": "!ChangeMe!",
-    "isEnabled": true
+    "isEnabled": true,
+    "configuration": {
+        "verify": false
+    }
 }

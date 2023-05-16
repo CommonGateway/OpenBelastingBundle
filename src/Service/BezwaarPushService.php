@@ -106,7 +106,10 @@ class BezwaarPushService
         $this->entityManager->persist($synchronization);
         $this->entityManager->flush();
 
-        return ['response' => $result];
+        return [
+            'response' => $result,
+            'bezwaar'  => $bezwaar,
+        ];
 
     }//end sendBezwaar()
 
@@ -142,16 +145,9 @@ class BezwaarPushService
 
         $synchronization = $this->synchronizationService->findSyncBySource($source, $entity, $objectArray['aanslagbiljetnummer'].'-'.$objectArray['aanslagbiljetvolgnummer']);
 
-        // If we already have a sync with a object for given aanslagbiljet return error (cant create 2 bezwaren for one aanslagbiljet).
-        if ($synchronization->getObject() !== null) {
-            return [];
-        }
-
         $this->synchronizationService->synchronize($synchronization, $objectArray);
 
-        $this->sendBezwaar($source, $objectArray, $synchronization);
-
-        return ['response' => $objectArray];
+        return $this->sendBezwaar($source, $objectArray, $synchronization);
 
     }//end bezwaarPushHandler()
 
