@@ -145,11 +145,6 @@ class BezwaarPushService
 
         $synchronization = $this->synchronizationService->findSyncBySource($source, $entity, $objectArray['aanslagbiljetnummer'].'-'.$objectArray['aanslagbiljetvolgnummer']);
 
-        // If we already have a sync with a object for given aanslagbiljet return error (cant create 2 bezwaren for one aanslagbiljet).
-        if ($synchronization->getObject() !== null) {
-            return [];
-        }
-
         $this->synchronizationService->synchronize($synchronization, $objectArray);
 
         return $this->sendBezwaar($source, $objectArray, $synchronization);
