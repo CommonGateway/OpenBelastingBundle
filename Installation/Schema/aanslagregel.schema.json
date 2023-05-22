@@ -1,7 +1,7 @@
 {
   "$id": "https://openbelasting.nl/schemas/openblasting.aanslagregel.schema.json",
   "$schema": "https://docs.commongateway.nl/schemas/Entity.schema.json",
-  "version": "0.1",
+  "version": "0.2",
   "title": "AanslagRegel",
   "description": "De inhoud van een aanslagregel",
   "type": "object",
@@ -14,7 +14,9 @@
     "einddatum",
     "heffingsgrondslag",
     "ingangsdatum",
-    "omschrijvingBelastingsoort"
+    "omschrijvingBelastingsoort",
+    "codeBelastingtype",
+    "omschrijvingBelastingtype"
   ],
   "properties": {
     "belastingplichtnummer": {
@@ -85,6 +87,14 @@
       "items": {
         "$ref": "https://openbelasting.nl/schemas/openblasting.adres.schema.json"
       }
+    },
+    "codeBelastingtype": {
+      "type": "string",
+      "example": "0002"
+    },
+    "omschrijvingBelastingtype": {
+      "type": "string",
+      "example": "OZB eigenaren niet-woningen"
     }
   }
 }
