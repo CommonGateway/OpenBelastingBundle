@@ -143,6 +143,7 @@ class BezwaarPushService
         $object      = $this->entityManager->find('App:ObjectEntity', $dataId);
         $objectArray = $object->toArray(['metadata' => false]);
 
+        // There are (very) few cases in which there are multiple aanslagBiljetNummer with different aanslagVolgNummer.
         $synchronization = $this->synchronizationService->findSyncBySource($source, $entity, $objectArray['aanslagbiljetnummer'].'-'.$objectArray['aanslagbiljetvolgnummer']);
 
         $this->synchronizationService->synchronize($synchronization, $objectArray);

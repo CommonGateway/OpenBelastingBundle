@@ -88,6 +88,7 @@ class SyncAanslagenService
      */
     private function syncAanslag(array $aanslag, Gateway $source, Entity $entity)
     {
+        // There are (very) few cases in which there are multiple aanslagBiljetNummer with different aanslagVolgNummer.
         $sourceId = $aanslag['aanslagbiljetnummer'].'-'.$aanslag['aanslagbiljetvolgnummer'];
         // Get or create sync and map object.
         $synchronization = $this->synchronizationService->findSyncBySource($source, $entity, $sourceId);
