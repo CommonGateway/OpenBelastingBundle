@@ -158,7 +158,7 @@ class SyncAanslagenService
         $dateTime = new DateTime();
         $dateTime->add(DateInterval::createFromDateString('-2 year'));
         $twoYearsAgo = $dateTime->format('Y');
-        $query        = [
+        $query       = [
             'bsn'                 => $bsn,
             'belastingjaar-vanaf' => $twoYearsAgo,
         ];
