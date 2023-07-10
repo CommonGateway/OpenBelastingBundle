@@ -155,12 +155,12 @@ class SyncAanslagenService
     private function fetchAanslagen(Gateway $source, string $bsn): array
     {
         $endpoint = '/v1/aanslagen';
-        $dateTime = new DateTime('-4Y');
-        $dateTime->add(DateInterval::createFromDateString('-4 year'));
-        $fourYearsAgo = $dateTime->format('Y');
-        $query        = [
+        $dateTime = new DateTime();
+        $dateTime->add(DateInterval::createFromDateString('-2 year'));
+        $twoYearsAgo = $dateTime->format('Y');
+        $query       = [
             'bsn'                 => $bsn,
-            'belastingjaar-vanaf' => $fourYearsAgo,
+            'belastingjaar-vanaf' => $twoYearsAgo,
         ];
         try {
             $fetchedAanslagen = $this->callService->getAllResults($source, $endpoint, ['query' => $query], 'result.instance.rows?');
