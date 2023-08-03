@@ -95,7 +95,10 @@ class BezwaarPushService
         // Send the POST request to pink.
         try {
             $response = $this->callService->call($source, '/v1/bezwaren', 'POST', ['body' => \Safe\json_encode($bezwaar), 'headers' => ['Content-Type' => 'application/json']]);
-            $result   = $this->callService->decodeResponse($source, $response);
+            $result = null;
+            if ($response->getStatusCode() !== 204) {
+                $result   = $this->callService->decodeResponse($source, $response);
+            }
         } catch (Exception $e) {
             $this->logger->error("Failed to POST bezwaar, message:  {$e->getMessage()}");
 
