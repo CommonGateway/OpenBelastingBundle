@@ -156,7 +156,7 @@ class SyncAanslagenService
     {
         $endpoint = '/v1/aanslagen';
         $dateTime = new DateTime();
-        $dateTime->add(DateInterval::createFromDateString('-5 year'));
+        $dateTime->add(DateInterval::createFromDateString('-4 year'));
         $twoYearsAgo = $dateTime->format('Y');
         $query       = [
             'bsn'                 => $bsn,
