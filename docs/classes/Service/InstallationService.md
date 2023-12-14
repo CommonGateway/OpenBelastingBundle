@@ -26,8 +26,8 @@ The constructor
 
 **Parameters**
 
-*   `(\EntityManagerInterface) $entityManager`
-    : The entity manager
+* `(\EntityManagerInterface) $entityManager`
+  : The entity manager
 
 **Return Values**
 

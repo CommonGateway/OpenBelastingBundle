@@ -37,10 +37,10 @@ An example handler that is triggered by an action.
 
 **Parameters**
 
-*   `(array) $data`
-    : The data array
-*   `(array) $configuration`
-    : The configuration array
+* `(array) $data`
+  : The data array
+* `(array) $configuration`
+  : The configuration array
 
 **Return Values**
 
