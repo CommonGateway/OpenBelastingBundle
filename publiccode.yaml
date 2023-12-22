@@ -18,23 +18,25 @@ softwareType: softwareAddon
 description:
   en:
     localisedName: null
-    genericName: This bundle contains the logic for reading assessments and writing objections to the PINK Open Taxes API.
-    shortDescription: OpenBelastingBundle
-    longDescription: This bundle contains the logic (schema's, mappings and code) for reading assessments and writing objections to the PINK Open Taxes API.
+    genericName: null
+    shortDescription: "This bundle contains the logic for reading assessments and writing objections to the PINK Open Taxes API."
+    longDescription: "This bundle contains the logic (schema's, mappings and code) for reading assessments and writing objections to the PINK Open Taxes API."
     documentation: null
     apiDocumentation: null
-    features: []
+    features:
+      - Common Ground Gateway Plugin
     screenshots: []
     videos: []
     awards: []
   nl:
     localisedName: null
-    genericName: Deze bundle bevat de logica voor het uitlezen van aanslagen en schrijven van bezwaren naar de PINK Open Belastingen API.
-    shortDescription: OpenBelastingBundle
-    longDescription: Deze bundle bevat de logica (schema's, mappings en code) voor het uitlezen van aanslagen en schrijven van bezwaren naar de PINK Open Belastingen API.
+    genericName: null
+    shortDescription: "Deze bundle bevat de logica voor het uitlezen van aanslagen en schrijven van bezwaren naar de PINK Open Belastingen API."
+    longDescription: "Deze bundle bevat de logica (schema's, mappings en code) voor het uitlezen van aanslagen en schrijven van bezwaren naar de PINK Open Belastingen API."
     documentation: null
     apiDocumentation: null
-    features: []
+    features:
+      - Common Ground Gateway Plugin
     screenshots: []
     videos: []
     awards: []
