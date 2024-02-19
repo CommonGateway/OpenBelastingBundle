@@ -53,7 +53,7 @@ class SyncAanslagenService
      * @var LoggerInterface
      */
     private LoggerInterface $logger;
-    
+
     private Stopwatch $stopwatch;
 
 
@@ -75,7 +75,7 @@ class SyncAanslagenService
         $this->callService            = $callService;
         $this->configuration          = [];
         $this->data                   = [];
-        $this->stopwatch = $stopwatch;
+        $this->stopwatch              = $stopwatch;
 
     }//end __construct()
 
@@ -119,7 +119,7 @@ class SyncAanslagenService
     private function syncAanslagen(array $fetchedAanslagen, Gateway $source, Entity $entity): array
     {
         $this->stopwatch->start('syncAanslagen', 'open-belasting-bundle');
-        
+
         $syncedAanslagen      = [];
         $syncedAanslagenCount = 0;
         $flushCount           = 0;
@@ -129,7 +129,7 @@ class SyncAanslagenService
                 $flushCount           = ($flushCount + 1);
                 $syncedAanslagen[]    = $syncedAanslag;
             }//end if
-            
+
             $this->stopwatch->lap('syncAanslagen');
 
             // Flush every 20.
@@ -146,9 +146,9 @@ class SyncAanslagenService
         }//end if
 
         $this->logger->debug("Synced $flushCount aanslagen from the $syncedAanslagenCount fetched aanslagen");
-        
+
         $this->stopwatch->stop('syncAanslagen');
-        
+
         return $syncedAanslagen;
 
     }//end syncAanslagen()
@@ -165,7 +165,7 @@ class SyncAanslagenService
     private function fetchAanslagen(Gateway $source, string $bsn): array
     {
         $this->stopwatch->start('fetchAanslagen', 'open-belasting-bundle');
-        
+
         $endpoint = '/v1/aanslagen';
         $dateTime = new DateTime();
         $dateTime->add(DateInterval::createFromDateString('-4 year'));
@@ -184,7 +184,7 @@ class SyncAanslagenService
 
         $fetchedAanslagenCount = count($fetchedAanslagen);
         $this->logger->debug("Fetched $fetchedAanslagenCount aanslagen");
-        
+
         $this->stopwatch->stop('fetchAanslagen');
 
         return $fetchedAanslagen;
@@ -214,9 +214,9 @@ class SyncAanslagenService
         $this->logger->debug("SyncAanslagenService -> syncAanslagenHandler()");
 
         $fetchedAanslagen = $this->fetchAanslagen($source, $bsn);
-        
+
         $array = $this->syncAanslagen($fetchedAanslagen, $source, $entity);
-        
+
         $this->stopwatch->stop('fetchAndSyncAanslagen');
 
         return $array;
