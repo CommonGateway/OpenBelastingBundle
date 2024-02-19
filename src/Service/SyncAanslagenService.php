@@ -17,6 +17,7 @@ use App\Entity\Gateway;
 use App\Entity\Entity;
 use DateTime;
 use DateInterval;
+use Symfony\Component\Stopwatch\Stopwatch;
 
 class SyncAanslagenService
 {
@@ -52,6 +53,8 @@ class SyncAanslagenService
      * @var LoggerInterface
      */
     private LoggerInterface $logger;
+    
+    private Stopwatch $stopwatch;
 
 
     /**
@@ -63,7 +66,8 @@ class SyncAanslagenService
         EntityManagerInterface $entityManager,
         LoggerInterface $pluginLogger,
         SynchronizationService $synchronizationService,
-        CallService $callService
+        CallService $callService,
+        Stopwatch $stopwatch
     ) {
         $this->entityManager          = $entityManager;
         $this->logger                 = $pluginLogger;
@@ -71,6 +75,7 @@ class SyncAanslagenService
         $this->callService            = $callService;
         $this->configuration          = [];
         $this->data                   = [];
+        $this->stopwatch = $stopwatch;
 
     }//end __construct()
 
@@ -113,6 +118,8 @@ class SyncAanslagenService
      */
     private function syncAanslagen(array $fetchedAanslagen, Gateway $source, Entity $entity): array
     {
+        $this->stopwatch->start('syncAanslagen', 'open-belasting-bundle');
+        
         $syncedAanslagen      = [];
         $syncedAanslagenCount = 0;
         $flushCount           = 0;
@@ -122,6 +129,8 @@ class SyncAanslagenService
                 $flushCount           = ($flushCount + 1);
                 $syncedAanslagen[]    = $syncedAanslag;
             }//end if
+            
+            $this->stopwatch->lap('syncAanslagen');
 
             // Flush every 20.
             if ($flushCount == 20) {
@@ -137,7 +146,9 @@ class SyncAanslagenService
         }//end if
 
         $this->logger->debug("Synced $flushCount aanslagen from the $syncedAanslagenCount fetched aanslagen");
-
+        
+        $this->stopwatch->stop('syncAanslagen');
+        
         return $syncedAanslagen;
 
     }//end syncAanslagen()
@@ -153,6 +164,8 @@ class SyncAanslagenService
      */
     private function fetchAanslagen(Gateway $source, string $bsn): array
     {
+        $this->stopwatch->start('fetchAanslagen', 'open-belasting-bundle');
+        
         $endpoint = '/v1/aanslagen';
         $dateTime = new DateTime();
         $dateTime->add(DateInterval::createFromDateString('-4 year'));
@@ -171,6 +184,8 @@ class SyncAanslagenService
 
         $fetchedAanslagenCount = count($fetchedAanslagen);
         $this->logger->debug("Fetched $fetchedAanslagenCount aanslagen");
+        
+        $this->stopwatch->stop('fetchAanslagen');
 
         return $fetchedAanslagen;
 
@@ -186,6 +201,7 @@ class SyncAanslagenService
      **/
     public function fetchAndSyncAanslagen(string $bsn): array
     {
+        $this->stopwatch->start('fetchAndSyncAanslagen', 'open-belasting-bundle');
 
         $source = $this->entityManager->getRepository('App:Gateway')->findOneBy(['reference' => 'https://openbelasting.nl/source/openbelasting.pinkapi.source.json']);
         $entity = $this->entityManager->getRepository('App:Entity')->findOneBy(['reference' => 'https://openbelasting.nl/schemas/openblasting.aanslagbiljet.schema.json']);
@@ -198,8 +214,12 @@ class SyncAanslagenService
         $this->logger->debug("SyncAanslagenService -> syncAanslagenHandler()");
 
         $fetchedAanslagen = $this->fetchAanslagen($source, $bsn);
+        
+        $array = $this->syncAanslagen($fetchedAanslagen, $source, $entity);
+        
+        $this->stopwatch->stop('fetchAndSyncAanslagen');
 
-        return $this->syncAanslagen($fetchedAanslagen, $source, $entity);
+        return $array;
 
     }//end fetchAndSyncAanslagen()
 
