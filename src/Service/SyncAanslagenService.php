@@ -175,7 +175,13 @@ class SyncAanslagenService
             'belastingjaar-vanaf' => $twoYearsAgo,
         ];
         try {
-            $fetchedAanslagen = $this->callService->getAllResults($source, $endpoint, ['query' => $query], 'result.instance.rows?');
+            $this->stopwatch->start('fetchAanslagen-getAllResults', 'open-belasting-bundle');
+            $response = $this->callService->call($source, $endpoint, 'GET', ['query' => $query]);
+            $fetchedAanslagen = $this->callService->decodeResponse($source, $response);
+            
+            // In case of pagination we would need getAllResults instead of call:
+//            $fetchedAanslagen = $this->callService->getAllResults($source, $endpoint, ['query' => $query], 'result.instance.rows?');
+            $this->stopwatch->stop('fetchAanslagen-getAllResults');
         } catch (Exception $e) {
             $this->logger->error("Failed to fetch: {$e->getMessage()}");
 
