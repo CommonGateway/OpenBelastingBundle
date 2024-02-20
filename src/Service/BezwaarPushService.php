@@ -84,13 +84,13 @@ class BezwaarPushService
     /**
      * Sends bezwaar to open belastingen api.
      *
-     * @param Gateway         $source
-     * @param array           $bezwaar
+     * @param Gateway              $source
+     * @param array                $bezwaar
      * @param Synchronization|null $synchronization
      *
      * @return array if went wrong
      */
-    private function sendBezwaar(Gateway $source, array $bezwaar, ?Synchronization $synchronization = null): ?array
+    private function sendBezwaar(Gateway $source, array $bezwaar, ?Synchronization $synchronization=null): ?array
     {
         // Send the POST request to pink.
         try {
@@ -107,7 +107,7 @@ class BezwaarPushService
 
         // Flush
         // Old sync code
-//        $this->entityManager->persist($synchronization);
+        // $this->entityManager->persist($synchronization);
         $this->entityManager->flush();
 
         return [
@@ -134,10 +134,9 @@ class BezwaarPushService
         $data = $data['response'];
 
         $source = $this->entityManager->getRepository('App:Gateway')->findOneBy(['reference' => 'https://openbelasting.nl/source/openbelasting.pinkapi.source.json']);
-//        $entity = $this->entityManager->getRepository('App:Entity')->findOneBy(['reference' => 'https://openbelasting.nl/schemas/openblasting.bezwaaraanvraag.schema.json']);
-
+        // $entity = $this->entityManager->getRepository('App:Entity')->findOneBy(['reference' => 'https://openbelasting.nl/schemas/openblasting.bezwaaraanvraag.schema.json']);
         if ($source === null
-//            || $entity === null
+            // || $entity === null
         ) {
             return [];
         }
@@ -148,16 +147,15 @@ class BezwaarPushService
 
         $object      = $this->entityManager->find('App:ObjectEntity', $dataId);
         $objectArray = $object->toArray(['metadata' => false]);
-        
+
         // Old version with sync:
-//        // There are (very) few cases in which there are multiple aanslagBiljetNummer with different aanslagVolgNummer.
-//        $synchronization = $this->synchronizationService->findSyncBySource($source, $entity, $objectArray['aanslagbiljetnummer'].'-'.$objectArray['aanslagbiljetvolgnummer']);
-//
-//        $this->synchronizationService->synchronize($synchronization, $objectArray);
-        
+        // There are (very) few cases in which there are multiple aanslagBiljetNummer with different aanslagVolgNummer.
+        // $synchronization = $this->synchronizationService->findSyncBySource($source, $entity, $objectArray['aanslagbiljetnummer'].'-'.$objectArray['aanslagbiljetvolgnummer']);
+        //
+        // $this->synchronizationService->synchronize($synchronization, $objectArray);
         return $this->sendBezwaar($source, $objectArray);
         // Old version with sync:
-//        return $this->sendBezwaar($source, $objectArray, $synchronization);
+        // return $this->sendBezwaar($source, $objectArray, $synchronization);
 
     }//end bezwaarPushHandler()
 
