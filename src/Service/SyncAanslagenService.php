@@ -53,6 +53,7 @@ class SyncAanslagenService
      */
     private LoggerInterface $logger;
 
+
     /**
      * @param EntityManagerInterface $entityManager  The Entity Manager.
      * @param LoggerInterface        $pluginLogger   The plugin version of the logger interface.
@@ -214,7 +215,6 @@ class SyncAanslagenService
         $array = $fetchedAanslagen;
         // The old way of syncing aanslagen from source to gateway, this is very slow!
         // $array = $this->syncAanslagen($fetchedAanslagen, $source, $entity);
-
         return $array;
 
     }//end fetchAndSyncAanslagen()
