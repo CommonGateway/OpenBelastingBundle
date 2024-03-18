@@ -146,23 +146,34 @@ class SyncAanslagenService
     /**
      * Fetches aanslagen from openbelastingen api.
      *
-     * @param Gateway $source OpenBelasting API.
-     * @param string  $bsn    Dutch burgerservicenummer to fetch aanslagen for.
+     * @param Gateway     $source             OpenBelasting API.
+     * @param string      $bsn                Dutch burgerservicenummer to fetch aanslagen for.
+     * @param string|null $belastingjaarVanaf Belasting jaar minimum to use for filtering.
      *
      * @return array $fetchedAanslagen
      */
-    private function fetchAanslagen(Gateway $source, string $bsn): array
+    private function fetchAanslagen(Gateway $source, string $bsn, ?string $belastingjaarVanaf=null): array
     {
         $endpoint = '/v1/aanslagen';
         $dateTime = new DateTime();
         $dateTime->add(DateInterval::createFromDateString('-4 year'));
-        $twoYearsAgo = $dateTime->format('Y');
-        $query       = [
+        $fourYearsAgo = $dateTime->format('Y');
+
+        // If belastingjaarVanaf is not set or if it set to longer ago than 4 years ago, set it to fourYearsAgo
+        if (empty($belastingjaarVanaf) === true || $belastingjaarVanaf < $fourYearsAgo) {
+            $belastingjaarVanaf = $fourYearsAgo;
+        }
+
+        $query = [
             'bsn'                 => $bsn,
-            'belastingjaar-vanaf' => $twoYearsAgo,
+            'belastingjaar-vanaf' => $belastingjaarVanaf,
         ];
         try {
-            $fetchedAanslagen = $this->callService->getAllResults($source, $endpoint, ['query' => $query], 'result.instance.rows?');
+            $response         = $this->callService->call($source, $endpoint, 'GET', ['query' => $query]);
+            $fetchedAanslagen = $this->callService->decodeResponse($source, $response);
+
+            // In case of pagination we would need getAllResults instead of call:
+            // $fetchedAanslagen = $this->callService->getAllResults($source, $endpoint, ['query' => $query], 'result.instance.rows?');
         } catch (Exception $e) {
             $this->logger->error("Failed to fetch: {$e->getMessage()}");
 
@@ -180,17 +191,19 @@ class SyncAanslagenService
     /**
      * Fetches aanslagbiljetten from the openbelastingen api with given bsn and synchronizes them in the gateway.
      *
-     * @param string $bsn Dutch burgerservicenummer to fetch aanslagen for.
+     * @param string      $bsn                Dutch burgerservicenummer to fetch aanslagen for.
+     * @param string|null $belastingjaarVanaf Belasting jaar minimum to use for filtering.
      *
      * @return array $syncedAanslagen
      **/
-    public function fetchAndSyncAanslagen(string $bsn): array
+    public function fetchAndSyncAanslagen(string $bsn, ?string $belastingjaarVanaf=null): array
     {
-
         $source = $this->entityManager->getRepository('App:Gateway')->findOneBy(['reference' => 'https://openbelasting.nl/source/openbelasting.pinkapi.source.json']);
-        $entity = $this->entityManager->getRepository('App:Entity')->findOneBy(['reference' => 'https://openbelasting.nl/schemas/openblasting.aanslagbiljet.schema.json']);
-
-        if ($source === null || $entity === null) {
+        // Old way of getting entity for sync
+        // $entity = $this->entityManager->getRepository('App:Entity')->findOneBy(['reference' => 'https://openbelasting.nl/schemas/openblasting.aanslagbiljet.schema.json']);
+        if ($source === null
+            // || $entity === null
+        ) {
             $this->logger->error("Source or entity not found");
             return [];
         }
@@ -199,7 +212,10 @@ class SyncAanslagenService
 
         $fetchedAanslagen = $this->fetchAanslagen($source, $bsn);
 
-        return $this->syncAanslagen($fetchedAanslagen, $source, $entity);
+        $array = $fetchedAanslagen;
+        // The old way of syncing aanslagen from source to gateway, this is very slow!
+        // $array = $this->syncAanslagen($fetchedAanslagen, $source, $entity);
+        return $array;
 
     }//end fetchAndSyncAanslagen()
 
